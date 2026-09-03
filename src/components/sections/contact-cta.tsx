@@ -18,7 +18,7 @@ export function ContactCta() {
         <Reveal delay={80}>
           <h2 className="mx-auto mt-5 max-w-3xl text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
             Tienes un proyecto en mente?{" "}
-            <span className="italic text-accent">Contanos.</span>
+            <span className="text-accent">Contanos.</span>
           </h2>
         </Reveal>
         <Reveal delay={140}>

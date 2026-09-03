@@ -10,9 +10,10 @@
   --fg: #17150f;
   --muted: #6b675c;
   --line: rgba(23, 21, 15, 0.14);
-  --accent: #e5502a;
+  /* Magenta de marca (tomado del logo de @victoriadesign.pe, ~#b0308f) */
+  --accent: #a92a86;
   --accent-fg: #ffffff;
-  --glow: rgba(229, 80, 42, 0.16);
+  --glow: rgba(169, 42, 134, 0.15);
   color-scheme: light;
 }
 
@@ -22,9 +23,9 @@
   --fg: #f3efe6;
   --muted: #a29c8d;
   --line: rgba(243, 239, 230, 0.14);
-  --accent: #ff6a3d;
-  --accent-fg: #0c0b0a;
-  --glow: rgba(255, 106, 61, 0.14);
+  --accent: #d24da8;
+  --accent-fg: #ffffff;
+  --glow: rgba(210, 77, 168, 0.14);
   color-scheme: dark;
 }
 
@@ -40,7 +41,8 @@
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  /* Display geometrico para acercarse al logotipo de la marca */
+  --font-display: var(--font-poppins), "Segoe UI", system-ui, sans-serif;
 
   --breakpoint-xs: 24rem;
 }
@@ -74,9 +76,15 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    letter-spacing: -0.03em;
     text-wrap: balance;
+  }
+
+  /* Poppins necesita mas peso que un serif editorial para leerse como "display" */
+  .font-display {
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
   p {

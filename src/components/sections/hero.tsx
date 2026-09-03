@@ -22,23 +22,22 @@ export function Hero() {
         <Reveal>
           <p className="eyebrow flex items-center gap-3">
             <span className="inline-block h-px w-8 bg-accent" />
-            Estudio de diseno y desarrollo
+            Creatividad que conecta
           </p>
         </Reveal>
 
         <Reveal delay={90}>
-          <h1 className="mt-7 max-w-4xl text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl">
+          <h1 className="mt-7 max-w-4xl text-[2.6rem] leading-[1.03] sm:text-6xl md:text-7xl">
             Diseno y codigo que{" "}
-            <em className="font-display not-italic text-accent">hacen crecer</em>{" "}
-            <span className="italic">tu marca</span>.
+            <span className="text-accent">hacen crecer</span> tu marca.
           </h1>
         </Reveal>
 
         <Reveal delay={160}>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted">
-            Somos un duo: una disenadora y un programador. Creamos la marca, el
-            sitio y las piezas que tu negocio necesita para vender, en un solo
-            equipo y con un precio claro.
+            Somos un estudio creativo: diseno grafico, identidad y desarrollo
+            web. Ayudamos a emprendedores y marcas a destacar, en un solo equipo
+            y con precio cerrado.
           </p>
         </Reveal>
 

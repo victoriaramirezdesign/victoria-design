@@ -5,14 +5,16 @@ Todo lo que hoy es "de ejemplo" en el sitio. A medida que me lo pases, lo reempl
 ## 1. Datos del estudio (`src/lib/site.ts`)
 - [ ] Correo real (hoy: `hola@victoriadesign.pe`)
 - [ ] Numero de WhatsApp real (formato: 51 + numero, sin espacios)
-- [ ] URLs reales de Instagram, TikTok, Facebook, LinkedIn
+- [x] Instagram: `@victoriadesign.pe`
+- [x] LinkedIn: perfil de Ana Victoria Ramirez Sanchez
+- [ ] URLs de TikTok y Facebook (aun faltan)
 - [ ] Ciudad / base del estudio (hoy dice solo "Peru")
 - [ ] Ano de fundacion (si quieren mostrarlo)
 
 ## 2. El duo (`src/content/team.ts`)
-- [ ] Nombre real de cada integrante
-- [ ] Rol / titulo de cada uno
-- [ ] Bio corta (2-3 lineas)
+- [x] Disenadora: Ana Victoria Ramirez Sanchez
+- [ ] Nombre real del programador
+- [ ] Bio corta final de cada uno (2-3 lineas)
 - [ ] Foto de cada uno (cuadrada, min 800x800) -> `public/equipo/`
 
 ## 3. Servicios (`src/content/services.ts`)
@@ -35,9 +37,10 @@ Por cada proyecto real:
 - [ ] Confirmar los 4 pasos y los textos
 
 ## 6. Marca visual
-- [ ] Logo (SVG o PNG con fondo transparente)
+- [ ] Logo (SVG o PNG con fondo transparente) — se usa "VD" provisional
 - [ ] Favicon
-- [ ] Confirmar color de acento (hoy: coral `#ff6a3d`)
+- [x] Color de acento: magenta de marca (`#a92a86` claro / `#d24da8` oscuro), tomado del logo de IG
+- [ ] Confirmar la tipografia del logo (hoy: Poppins como aproximacion; si es Montserrat u otra, avisar)
 - [ ] Imagen para compartir en redes (OG image, 1200x630)
 
 ## 7. Textos legales (para el footer, mas adelante)
