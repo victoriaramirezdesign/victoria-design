@@ -1,6 +1,8 @@
 // Validacion y entrega de leads del formulario de contacto.
-// Sin dependencias externas: usa fetch contra las APIs REST de Resend y Supabase.
+// Guarda en Supabase (SDK) y envia correos con Resend (REST).
 // Mientras no existan las variables de entorno, el lead solo se registra en consola.
+
+import { getSupabaseAdmin } from "@/lib/supabase";
 
 export type LeadInput = {
   name: string;
@@ -46,32 +48,22 @@ export function validateLead(body: unknown):
   };
 }
 
-/** Guarda el lead en la tabla `leads` de Supabase (PostgREST). */
+/** Guarda el lead en la tabla `leads` de Supabase. */
 async function storeInSupabase(lead: LeadClean): Promise<boolean> {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return false;
+  const supabase = getSupabaseAdmin();
+  if (!supabase) return false;
 
-  const res = await fetch(`${url}/rest/v1/leads`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      Prefer: "return=minimal",
-    },
-    body: JSON.stringify({
-      name: lead.name,
-      email: lead.email,
-      project_type: lead.projectType,
-      budget: lead.budget ?? null,
-      message: lead.message,
-      source: "web-contacto",
-    }),
+  const { error } = await supabase.from("leads").insert({
+    name: lead.name,
+    email: lead.email,
+    project_type: lead.projectType,
+    budget: lead.budget ?? null,
+    message: lead.message,
+    source: "web-contacto",
   });
 
-  if (!res.ok) {
-    console.error("[leads] Supabase respondio", res.status, await res.text());
+  if (error) {
+    console.error("[leads] Supabase error:", error.message);
     return false;
   }
   return true;

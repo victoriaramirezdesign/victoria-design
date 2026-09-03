@@ -7,7 +7,7 @@ Next.js 16 + TypeScript + Tailwind CSS v4.
 
 ```bash
 npm install
-cp .env.example .env.local   # opcional en esta fase
+cp .env.example .env.local   # opcional; el sitio corre sin claves
 npm run dev
 ```
 
@@ -22,19 +22,21 @@ Abrir http://localhost:3000
 | `npm run start` | Sirve el build |
 | `npm run lint` | ESLint |
 
-## Estado actual (Fase 1)
+## Estado actual
 
 - [x] Diseno base, modo oscuro/claro, tipografia editorial
 - [x] Home: hero, servicios, trabajo destacado, proceso, estudio, CTA
 - [x] `/trabajos` y `/trabajos/[slug]` (contenido de ejemplo)
 - [x] `/contacto` con formulario + endpoint `api/leads`
-- [ ] Contenido real (ver `CONTENT.md`)
-- [ ] Supabase + Resend conectados (Fase 2)
-- [ ] Login de clientes con Clerk (Fase 2)
-- [ ] Pagos con pasarela peruana (Fase 3)
+- [x] Integraciones cableadas (se activan al aparecer su clave):
+      Supabase (leads), Resend (correos), PostHog (analitica), Sentry (errores)
+- [ ] Cargar las claves — ver **`SETUP.md`**
+- [ ] Contenido real — ver **`CONTENT.md`**
+- [ ] Login de clientes con Clerk (falta definir alcance)
+- [ ] Pagos con pasarela peruana (falta elegir proveedor)
 
 ## Despliegue
 
 Deploy automatico en Vercel al hacer push a `main`.
-Configurar en Vercel las variables de `.env.example` que apliquen.
-Ver `CLAUDE.md` para convenciones del proyecto.
+Guia completa de claves y cuentas: **`SETUP.md`**.
+Convenciones del proyecto: `CLAUDE.md`.

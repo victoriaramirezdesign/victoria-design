@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { track } from "@/lib/analytics";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -47,6 +48,10 @@ export function ContactForm() {
       }
 
       setStatus("success");
+      track("lead_enviado", {
+        tipo: String(data.projectType ?? ""),
+        presupuesto: String(data.budget ?? "no indicado"),
+      });
       form.reset();
     } catch (err) {
       setStatus("error");
