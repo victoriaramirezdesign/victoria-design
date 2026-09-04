@@ -16,16 +16,24 @@ Lo que hoy sigue en placeholder. A medida que me lo pases, lo reemplazo.
 - [ ] Bio final de cada uno (2-3 lineas; hoy hay una generica)
 - [ ] Foto de cada uno (cuadrada, min 800x800) -> `public/equipo/`
 
-## 3. Portafolio (`src/content/projects.ts`) — 12 clientes reales cargados
-Ya estan los nombres, anos y tipo de servicio. Por cada proyecto falta:
+## 3. Portafolio (`src/content/projects.ts`) — 12 clientes, 10 con logo
+Nombres, anos, tipo de servicio y **logos ya cargados** (PNG 1200x900 con
+fondo de la paleta del sitio, en `public/trabajos/<slug>/cover.png`).
+
+Falta por cada proyecto:
 - [ ] **Rubro** (`sector`) — ej. "Odontologia", "Cafeteria"
 - [ ] **Resumen** (`summary`) — 1-2 lineas de que se hizo
-- [ ] **Imagenes** -> `public/trabajos/<slug>/` y referenciarlas en `cover`
 - [ ] Resultados con numeros, si los hay (opcional pero potente)
+- [ ] Imagenes del trabajo en si (hoy solo esta el logo)
 
-Clientes cargados: Reyes Odontologia, GreenProd, No Hay 2, Santo Grano,
-Balik, Casa Villalta, Geocon Consult, Fullnes, Thana, Nutriavo, La Red,
-Aprendiendo Juntos.
+**Faltan los logos de:** Casa Villalta y La Red. Mientras tanto esas dos
+tarjetas muestran el nombre en texto.
+
+**Logos que llegaron pero NO estan en la lista de 12** (ya convertidos y
+listos en `public/trabajos/`, solo hay que decidir si se agregan como
+proyecto): Caraz Helados, Ceprobio, FishGrox, Brand-in, Carniprod.
+Ojo: el archivo "GREENPROD LOGO 25 NOV.jpg" en realidad contiene el logo
+de **Carniprod**, no de GreenProd.
 
 ## 4. Paquetes (`src/content/packages.ts`) — NUEVO
 - [ ] Confirmar los 3 planes y que incluye cada uno
@@ -50,8 +58,9 @@ Aprendiendo Juntos.
 - [ ] Decidir como se envia (hoy solo guarda el correo en Supabase)
 
 ## 9. Marca visual
-- [ ] **Logo** (SVG o PNG con fondo transparente) — no lo encontre en el
-      escritorio; hoy se usa el texto "VD" + wordmark
+- [ ] **Logo de Victoria Design** (SVG o PNG con fondo transparente) — la
+      carpeta "LOGOS DE PROYECTOS VD" trae los logos de los CLIENTES, pero
+      no el del estudio. Hoy se usa el texto "VD" + wordmark.
 - [ ] Favicon
 - [ ] Imagen para compartir en redes (OG, 1200x630)
 - [x] Color de acento: magenta `#a92a86` claro / `#d24da8` oscuro

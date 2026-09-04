@@ -26,6 +26,7 @@ const AMBOS = "Identidad + servicio corporativo";
 export const projects: Project[] = [
   {
     slug: "reyes-odontologia",
+    cover: "/trabajos/reyes-odontologia/cover.png",
     title: "Reyes Odontologia Especializada",
     year: "2021 — actual",
     category: IDENTIDAD,
@@ -34,6 +35,7 @@ export const projects: Project[] = [
   },
   {
     slug: "greenprod",
+    cover: "/trabajos/greenprod/cover.png",
     title: "GreenProd",
     year: "2024 — actual",
     category: IDENTIDAD,
@@ -42,6 +44,7 @@ export const projects: Project[] = [
   },
   {
     slug: "no-hay-2",
+    cover: "/trabajos/no-hay-2/cover.png",
     title: "No Hay 2",
     year: "2018 — actual",
     category: IDENTIDAD,
@@ -50,6 +53,7 @@ export const projects: Project[] = [
   },
   {
     slug: "santo-grano",
+    cover: "/trabajos/santo-grano/cover.png",
     title: "Santo Grano",
     year: "2026",
     category: AMBOS,
@@ -58,6 +62,7 @@ export const projects: Project[] = [
   },
   {
     slug: "balik",
+    cover: "/trabajos/balik/cover.png",
     title: "Balik",
     year: "2025 — actual",
     category: IDENTIDAD,
@@ -74,6 +79,7 @@ export const projects: Project[] = [
   },
   {
     slug: "geocon-consult",
+    cover: "/trabajos/geocon-consult/cover.png",
     title: "Geocon Consult",
     year: "2025",
     category: SERVICIO,
@@ -82,6 +88,7 @@ export const projects: Project[] = [
   },
   {
     slug: "fullnes",
+    cover: "/trabajos/fullnes/cover.png",
     title: "Fullnes",
     year: "2024 — 2026",
     category: IDENTIDAD,
@@ -90,6 +97,7 @@ export const projects: Project[] = [
   },
   {
     slug: "thana",
+    cover: "/trabajos/thana/cover.png",
     title: "Thana",
     year: "2023 — 2025",
     category: IDENTIDAD,
@@ -98,6 +106,7 @@ export const projects: Project[] = [
   },
   {
     slug: "nutriavo",
+    cover: "/trabajos/nutriavo/cover.png",
     title: "Nutriavo",
     year: "2022",
     category: AMBOS,
@@ -114,6 +123,7 @@ export const projects: Project[] = [
   },
   {
     slug: "aprendiendo-juntos",
+    cover: "/trabajos/aprendiendo-juntos/cover.png",
     title: "Aprendiendo Juntos",
     year: "2017 — 2023",
     category: IDENTIDAD,

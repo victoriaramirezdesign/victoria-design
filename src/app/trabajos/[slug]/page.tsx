@@ -71,10 +71,21 @@ export default async function ProjectPage(props: PageProps<"/trabajos/[slug]">) 
             </dl>
           </header>
 
-          <div className="mt-10 flex aspect-[16/9] items-center justify-center rounded-2xl border border-line bg-bg-elev p-8">
-            <span className="text-center font-display text-4xl text-fg/10 sm:text-5xl">
-              {project.title}
-            </span>
+          <div className="mt-10 aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-bg-elev sm:aspect-[16/9]">
+            {project.cover ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={project.cover}
+                alt={`Logotipo de ${project.title}`}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center p-8">
+                <span className="text-center font-display text-4xl text-fg/10 sm:text-5xl">
+                  {project.title}
+                </span>
+              </div>
+            )}
           </div>
 
           {project.results && project.results.length > 0 ? (
