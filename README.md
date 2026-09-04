@@ -24,10 +24,14 @@ Abrir http://localhost:3000
 
 ## Estado actual
 
-- [x] Diseno base, modo oscuro/claro, tipografia editorial
-- [x] Home: hero, servicios, trabajo destacado, proceso, estudio, CTA
-- [x] `/trabajos` y `/trabajos/[slug]` (contenido de ejemplo)
+- [x] Diseno base, modo oscuro/claro, identidad de marca aplicada
+- [x] Home: hero, servicios, trabajos, paquetes, proceso, testimonios,
+      estudio, Instagram, newsletter, CTA
+- [x] `/trabajos` y `/trabajos/[slug]` — 12 clientes reales
+- [x] `/notas` y `/notas/[slug]` (blog, sin contenido aun)
 - [x] `/contacto` con formulario + endpoint `api/leads`
+- [x] Newsletter con endpoint `api/subscribe` (tabla `subscribers`)
+- [x] Boton flotante de WhatsApp
 - [x] Integraciones conectadas: Supabase (leads), Resend (correos, dominio
       verificado), PostHog (analitica), Sentry (errores)
 - [ ] Faltan 2 claves secretas en Vercel — ver **`SETUP.md`**

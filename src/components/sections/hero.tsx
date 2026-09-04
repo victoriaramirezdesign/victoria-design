@@ -1,6 +1,7 @@
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { site } from "@/lib/site";
 
 const facts = [
   { k: "Base", v: "Peru" },
@@ -11,12 +12,30 @@ const facts = [
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
-      {/* Glow de fondo */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full blur-3xl"
-        style={{ background: "var(--glow)" }}
-      />
+      {site.heroVideo ? (
+        <>
+          <video
+            aria-hidden
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            src={site.heroVideo}
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-bg/60 via-bg/80 to-bg"
+          />
+        </>
+      ) : (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full blur-3xl"
+          style={{ background: "var(--glow)" }}
+        />
+      )}
 
       <Container className="relative pb-16 pt-16 sm:pb-24 sm:pt-24">
         <Reveal>
@@ -47,6 +66,16 @@ export function Hero() {
             <ButtonLink href="/trabajos" variant="outline">
               Ver trabajos
             </ButtonLink>
+            {site.bookingUrl ? (
+              <ButtonLink
+                href={site.bookingUrl}
+                variant="ghost"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Agendar llamada
+              </ButtonLink>
+            ) : null}
           </div>
         </Reveal>
 

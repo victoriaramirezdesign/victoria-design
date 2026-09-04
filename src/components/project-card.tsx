@@ -24,8 +24,8 @@ export function ProjectCard({
             loading={priority ? "eager" : "lazy"}
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center">
-            <span className="font-display text-5xl text-fg/10">
+          <div className="flex h-full w-full items-center justify-center p-6">
+            <span className="text-center font-display text-3xl leading-tight text-fg/10 sm:text-4xl">
               {project.title}
             </span>
           </div>
@@ -39,9 +39,13 @@ export function ProjectCard({
         <h3 className="font-display text-xl transition-colors group-hover:text-accent">
           {project.title}
         </h3>
-        <span className="font-mono text-xs text-muted">{project.year}</span>
+        <span className="shrink-0 font-mono text-xs text-muted">
+          {project.year}
+        </span>
       </div>
-      <p className="mt-1 text-sm text-muted">{project.client}</p>
+      {project.sector ? (
+        <p className="mt-1 text-sm text-muted">{project.sector}</p>
+      ) : null}
     </Link>
   );
 }

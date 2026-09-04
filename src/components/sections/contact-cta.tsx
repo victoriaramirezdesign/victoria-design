@@ -1,7 +1,7 @@
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import { whatsappLink } from "@/lib/site";
+import { site, whatsappLink } from "@/lib/site";
 
 export function ContactCta() {
   return (
@@ -38,6 +38,16 @@ export function ContactCta() {
             >
               WhatsApp
             </ButtonLink>
+            {site.bookingUrl ? (
+              <ButtonLink
+                href={site.bookingUrl}
+                variant="outline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Agendar llamada
+              </ButtonLink>
+            ) : null}
           </div>
         </Reveal>
       </Container>

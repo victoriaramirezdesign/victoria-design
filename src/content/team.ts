@@ -1,4 +1,4 @@
-// TODO(contenido): confirmar nombre del programador, bios finales y fotos (-> public/equipo/).
+// TODO(contenido): bios finales y fotos de cada uno (-> public/equipo/).
 
 export type Member = {
   name: string;
@@ -16,8 +16,7 @@ export const team: Member[] = [
     focus: ["Identidad de marca", "Diseno grafico", "Direccion de arte", "Contenido"],
   },
   {
-    // TODO(contenido): nombre real del programador
-    name: "El programador",
+    name: "Azet Ramirez",
     role: "Desarrollo web y tecnica",
     bio: "Se encarga de que todo funcione, cargue rapido y sea facil de mantener. Next.js, integraciones y datos.",
     focus: ["Desarrollo web", "Integraciones", "Performance", "Analitica"],

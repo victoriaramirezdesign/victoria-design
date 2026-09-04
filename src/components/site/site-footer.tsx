@@ -9,7 +9,9 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8">
         <div className="flex flex-col gap-12 md:flex-row md:justify-between">
           <div className="max-w-sm">
-            <p className="font-display text-2xl">{site.name}</p>
+            <p className="font-wordmark text-2xl uppercase tracking-[0.14em]">
+              {site.name}
+            </p>
             <p className="mt-3 text-sm leading-relaxed text-muted">
               {site.description}
             </p>

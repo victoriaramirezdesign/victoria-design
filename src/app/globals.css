@@ -43,6 +43,9 @@
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
   /* Display geometrico para acercarse al logotipo de la marca */
   --font-display: var(--font-poppins), "Segoe UI", system-ui, sans-serif;
+  /* Logotipo: aproximacion a EngraversGothic BT (ver layout.tsx) */
+  --font-wordmark: var(--font-julius), "Copperplate Gothic Light", "Segoe UI",
+    sans-serif;
 
   --breakpoint-xs: 24rem;
 }

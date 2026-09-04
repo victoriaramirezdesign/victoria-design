@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import { Geist, Geist_Mono, Poppins, Julius_Sans_One } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
+import { WhatsappFloat } from "@/components/whatsapp-float";
 import { themeInitScript } from "@/components/ui/theme-toggle";
 
 const geistSans = Geist({
@@ -23,6 +24,16 @@ const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
   weight: ["500", "600", "700"],
+});
+
+// Aproximacion libre a EngraversGothic BT (comercial, requiere licencia
+// webfont). Se usa solo en el logotipo. TODO(marca): si compran la licencia
+// web de EngraversGothic BT, reemplazar por next/font/local con el .woff2.
+const julius = Julius_Sans_One({
+  variable: "--font-julius",
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -60,7 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} dark h-full`}
+      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${julius.variable} dark h-full`}
       suppressHydrationWarning
     >
       <head>
@@ -78,6 +89,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        <WhatsappFloat />
       </body>
     </html>
   );

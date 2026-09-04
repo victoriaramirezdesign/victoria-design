@@ -41,7 +41,9 @@ export function SiteHeader() {
           <span className="inline-flex size-7 items-center justify-center rounded-full bg-accent text-[0.7rem] font-semibold text-accent-fg">
             VD
           </span>
-          <span className="font-display text-base">{site.name}</span>
+          <span className="font-wordmark text-base uppercase tracking-[0.14em]">
+            {site.name}
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

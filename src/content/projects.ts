@@ -1,76 +1,123 @@
-// TODO(contenido): estos proyectos son de ejemplo (placeholders).
-// Reemplazar por trabajos reales: nombre de cliente, rubro, ano, imagenes y resultados.
-// Cuando pasemos a Supabase, esta estructura se mantiene igual.
+// Clientes reales del estudio.
+// TODO(contenido): por cada uno falta el rubro (`sector`), el resumen
+// (`summary`), las imagenes (`cover` -> public/trabajos/<slug>/) y, cuando
+// existan, los resultados con numeros.
 
 export type Project = {
   slug: string;
   title: string;
-  client: string;
+  /** Rubro del cliente. TODO(contenido) */
+  sector?: string;
   year: string;
   category: string;
-  summary: string;
+  /** 1-2 lineas sobre el proyecto. TODO(contenido) */
+  summary?: string;
   services: string[];
   featured: boolean;
-  // Ruta a imagen en /public/trabajos/... (aun no cargadas)
+  /** Ruta a la portada en /public/trabajos/<slug>/ */
   cover?: string;
   results?: { label: string; value: string }[];
 };
 
+const IDENTIDAD = "Identidad corporativa";
+const SERVICIO = "Servicio corporativo";
+const AMBOS = "Identidad + servicio corporativo";
+
 export const projects: Project[] = [
   {
-    slug: "aurora-cafe",
-    title: "Aurora Cafe",
-    client: "Cafeteria de especialidad",
+    slug: "reyes-odontologia",
+    title: "Reyes Odontologia Especializada",
+    year: "2021 — actual",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: true,
+  },
+  {
+    slug: "greenprod",
+    title: "GreenProd",
+    year: "2024 — actual",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: true,
+  },
+  {
+    slug: "no-hay-2",
+    title: "No Hay 2",
+    year: "2018 — actual",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: true,
+  },
+  {
+    slug: "santo-grano",
+    title: "Santo Grano",
+    year: "2026",
+    category: AMBOS,
+    services: [SERVICIO, IDENTIDAD],
+    featured: true,
+  },
+  {
+    slug: "balik",
+    title: "Balik",
+    year: "2025 — actual",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: false,
+  },
+  {
+    slug: "casa-villalta",
+    title: "Casa Villalta",
     year: "2025",
-    category: "Marca + Sitio",
-    summary:
-      "Identidad calida y un sitio con carta digital y reservas. Placeholder de ejemplo hasta cargar el caso real.",
-    services: ["Identidad de marca", "Sitio web", "Carta digital"],
-    featured: true,
-    results: [
-      { label: "Reservas online", value: "+140%" },
-      { label: "Tiempo de carga", value: "0.9s" },
-    ],
+    category: AMBOS,
+    services: [SERVICIO, IDENTIDAD],
+    featured: false,
   },
   {
-    slug: "nexo-legal",
-    title: "Nexo Legal",
-    client: "Estudio de abogados",
+    slug: "geocon-consult",
+    title: "Geocon Consult",
     year: "2025",
-    category: "Sitio corporativo",
-    summary:
-      "Sitio serio y claro para un estudio boutique, con blog y formulario de consultas. Contenido de ejemplo.",
-    services: ["Diseno UI/UX", "Desarrollo", "SEO base"],
-    featured: true,
-    results: [
-      { label: "Consultas / mes", value: "x3" },
-      { label: "Posicion en Google", value: "Top 5" },
-    ],
+    category: SERVICIO,
+    services: [SERVICIO],
+    featured: false,
   },
   {
-    slug: "campo-vivo",
-    title: "Campo Vivo",
-    client: "Marca de alimentos organicos",
-    year: "2024",
-    category: "E-commerce",
-    summary:
-      "Tienda online con pagos locales y suscripcion de canastas semanales. Caso de ejemplo.",
-    services: ["Branding", "Tienda online", "Pagos"],
-    featured: true,
-    results: [
-      { label: "Ventas primer mes", value: "S/ 38k" },
-      { label: "Recompra", value: "46%" },
-    ],
+    slug: "fullnes",
+    title: "Fullnes",
+    year: "2024 — 2026",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: false,
   },
   {
-    slug: "estudio-lumen",
-    title: "Estudio Lumen",
-    client: "Fotografia de producto",
-    year: "2024",
-    category: "Portafolio",
-    summary:
-      "Portafolio visual con galerias rapidas y contacto directo por WhatsApp. Contenido de ejemplo.",
-    services: ["Diseno", "Desarrollo"],
+    slug: "thana",
+    title: "Thana",
+    year: "2023 — 2025",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: false,
+  },
+  {
+    slug: "nutriavo",
+    title: "Nutriavo",
+    year: "2022",
+    category: AMBOS,
+    services: [SERVICIO, IDENTIDAD],
+    featured: false,
+  },
+  {
+    slug: "la-red",
+    title: "La Red",
+    year: "2021 — 2023",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: false,
+  },
+  {
+    slug: "aprendiendo-juntos",
+    title: "Aprendiendo Juntos",
+    year: "2017 — 2023",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
     featured: false,
   },
 ];

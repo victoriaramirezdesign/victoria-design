@@ -47,15 +47,19 @@ export default async function ProjectPage(props: PageProps<"/trabajos/[slug]">) 
             <h1 className="mt-4 text-4xl leading-[1.03] sm:text-6xl">
               {project.title}
             </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
-              {project.summary}
-            </p>
+            {project.summary ? (
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+                {project.summary}
+              </p>
+            ) : null}
 
             <dl className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4">
-              <div>
-                <dt className="eyebrow">Cliente</dt>
-                <dd className="mt-1 text-sm">{project.client}</dd>
-              </div>
+              {project.sector ? (
+                <div>
+                  <dt className="eyebrow">Rubro</dt>
+                  <dd className="mt-1 text-sm">{project.sector}</dd>
+                </div>
+              ) : null}
               <div>
                 <dt className="eyebrow">Ano</dt>
                 <dd className="mt-1 text-sm">{project.year}</dd>
@@ -67,8 +71,8 @@ export default async function ProjectPage(props: PageProps<"/trabajos/[slug]">) 
             </dl>
           </header>
 
-          <div className="mt-10 flex aspect-[16/9] items-center justify-center rounded-2xl border border-line bg-bg-elev">
-            <span className="font-display text-5xl text-fg/10">
+          <div className="mt-10 flex aspect-[16/9] items-center justify-center rounded-2xl border border-line bg-bg-elev p-8">
+            <span className="text-center font-display text-4xl text-fg/10 sm:text-5xl">
               {project.title}
             </span>
           </div>

@@ -30,8 +30,11 @@ Objetivo: portafolio + captacion de leads. Fases siguientes: login de clientes y
 
 ## Estructura
 
-- `src/app/` — rutas: `/`, `/trabajos`, `/trabajos/[slug]`, `/contacto`, `api/leads`.
-- `src/components/sections/` — bloques de la home.
+- `src/app/` — rutas: `/`, `/trabajos`, `/trabajos/[slug]`, `/notas`,
+  `/notas/[slug]`, `/contacto`, `api/leads`, `api/subscribe`.
+- `src/components/sections/` — bloques de la home. Varias secciones se
+  auto-ocultan si su contenido esta vacio (testimonios, paquetes) o cambian
+  a un estado alterno (instagram, notas). No romper ese comportamiento.
 - `src/components/ui/` — primitivos (Container, Reveal, Button, ThemeToggle, SectionHeading).
 - `src/lib/` — `site.ts` (config), `leads.ts` (validacion + entrega), `supabase.ts`, `analytics.ts` (PostHog `track`).
 - `src/content/` — datos editables (servicios, proyectos, proceso, equipo).
