@@ -2,8 +2,9 @@
 // Inicializa PostHog (analitica) y Sentry (errores) solo si hay claves.
 
 import * as Sentry from "@sentry/nextjs";
+import { POSTHOG_KEY_DEFAULT, SENTRY_DSN_DEFAULT } from "@/lib/env-defaults";
 
-const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY ?? POSTHOG_KEY_DEFAULT;
 if (posthogKey) {
   // Carga diferida: posthog-js no entra al bundle inicial.
   import("posthog-js")
@@ -22,7 +23,7 @@ if (posthogKey) {
     });
 }
 
-const sentryDsn = process.env.NEXT_PUBLIC_SENTRY_DSN;
+const sentryDsn = process.env.NEXT_PUBLIC_SENTRY_DSN ?? SENTRY_DSN_DEFAULT;
 if (sentryDsn) {
   Sentry.init({
     dsn: sentryDsn,

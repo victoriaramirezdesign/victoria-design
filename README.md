@@ -28,9 +28,9 @@ Abrir http://localhost:3000
 - [x] Home: hero, servicios, trabajo destacado, proceso, estudio, CTA
 - [x] `/trabajos` y `/trabajos/[slug]` (contenido de ejemplo)
 - [x] `/contacto` con formulario + endpoint `api/leads`
-- [x] Integraciones cableadas (se activan al aparecer su clave):
-      Supabase (leads), Resend (correos), PostHog (analitica), Sentry (errores)
-- [ ] Cargar las claves — ver **`SETUP.md`**
+- [x] Integraciones conectadas: Supabase (leads), Resend (correos, dominio
+      verificado), PostHog (analitica), Sentry (errores)
+- [ ] Faltan 2 claves secretas en Vercel — ver **`SETUP.md`**
 - [ ] Contenido real — ver **`CONTENT.md`**
 - [ ] Login de clientes con Clerk (falta definir alcance)
 - [ ] Pagos con pasarela peruana (falta elegir proveedor)

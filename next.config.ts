@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
+import { SENTRY_DSN_DEFAULT } from "@/lib/env-defaults";
 
 const nextConfig: NextConfig = {
   images: {
@@ -10,7 +11,7 @@ const nextConfig: NextConfig = {
 
 // Solo envolvemos con Sentry si hay DSN configurado (evita ruido en local).
 const config: NextConfig =
-  process.env.NEXT_PUBLIC_SENTRY_DSN
+  (process.env.NEXT_PUBLIC_SENTRY_DSN ?? SENTRY_DSN_DEFAULT)
     ? withSentryConfig(nextConfig, {
         org: process.env.SENTRY_ORG,
         project: process.env.SENTRY_PROJECT,

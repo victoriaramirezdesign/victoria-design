@@ -1,134 +1,64 @@
 # Puesta en marcha — Victoria Design
 
-El codigo ya esta listo para todas las integraciones. Cada una se **activa sola**
-cuando su clave aparece en las variables de entorno. Nada se rompe si falta una.
+Estado actual: **sitio en vivo en `victoriadesign.pe`**, GitHub, Vercel,
+Cloudflare (DNS), Supabase (proyecto + tabla `leads`) y Resend (dominio
+verificado + clave) ya están conectados y configurados. PostHog y Sentry
+ya tienen clave/DSN por defecto en el código (`src/lib/env-defaults.ts`) —
+no son secretos, no hace falta tocarlos.
 
-Yo (Claude) **no puedo entrar a los paneles** de Supabase, Vercel, Resend, etc.
-(no tengo sesion iniciada ni permiso para autenticarme). Estos pasos son de
-copiar y pegar claves — te toman ~15 min.
-
----
-
-## Paso 0 — Subir a GitHub (si aun no esta)
-
-En `C:\Users\juanr\Desktop\victoria-design`:
-
-```bash
-git remote add origin https://github.com/TU-USUARIO/TU-REPO.git
-```
-
-```bash
-git push -u origin main
-```
+Solo faltan **2 valores realmente secretos**, y pegarlos en Vercel es el
+único paso que no se puede automatizar (no existe una herramienta para
+escribir Environment Variables en Vercel).
 
 ---
 
-## Paso 1 — Vercel (deja el sitio en vivo)
+## Lo único que falta: 2 claves en Vercel
 
-1. vercel.com > **Add New > Project** > importa el repo.
-2. Framework: Next.js (lo detecta solo). **Deploy**.
-3. Queda en `https://TU-PROYECTO.vercel.app` — ya funciona sin variables.
-4. Copia esa URL y ponla como variable `NEXT_PUBLIC_SITE_URL` (Paso 6).
+Vercel → proyecto **`victoriadesign-web`** → **Settings → Environment
+Variables** → agrega estas dos para *Production*, *Preview* y
+*Development*:
 
----
-
-## Paso 2 — Supabase (guardar leads)
-
-1. supabase.com > tu proyecto (o **New project**, region *South America (São Paulo)*).
-2. **SQL Editor** > New query > pega el contenido de
-   `supabase/migrations/0001_leads.sql` > **Run**. Crea la tabla `leads`.
-3. **Project Settings > Data API**: copia la **Project URL**.
-4. **Project Settings > API Keys**: copia la **`service_role`** (secreta).
-5. Guarda para el Paso 6:
-   - `SUPABASE_URL` = la Project URL
-   - `SUPABASE_SERVICE_ROLE_KEY` = la service_role
-
----
-
-## Paso 3 — Resend (correos automaticos de leads)
-
-1. resend.com > **API Keys > Create** > copia la clave (`re_...`).
-2. **Domains > Add Domain** > `victoriadesign.pe`.
-3. Resend te da 3-4 registros DNS (MX, TXT, DKIM). Agregalos en **Cloudflare**
-   (DNS del dominio) y espera la verificacion (verde).
-4. Guarda para el Paso 6:
-   - `RESEND_API_KEY` = la clave
-   - `LEADS_FROM_EMAIL` = `Victoria Design <hola@victoriadesign.pe>`
-   - `LEADS_TO_EMAIL` = el correo donde quieren recibir los leads
-
-> Sin dominio verificado, Resend solo deja enviar a tu propio correo. Para
-> probar antes: usa `onboarding@resend.dev` como `LEADS_FROM_EMAIL`.
-
----
-
-## Paso 4 — PostHog (analitica)
-
-1. posthog.com > tu proyecto > **Settings > Project** > copia la
-   **Project API Key** (`phc_...`).
-2. Fijate si tu instancia es US o EU (arriba a la izquierda).
-3. Guarda para el Paso 6:
-   - `NEXT_PUBLIC_POSTHOG_KEY` = `phc_...`
-   - `NEXT_PUBLIC_POSTHOG_HOST` = `https://us.i.posthog.com` (o `https://eu.i.posthog.com`)
-
-El sitio ya envia el evento `lead_enviado` (con tipo y presupuesto, sin datos
-personales) y los pageviews automaticamente.
-
----
-
-## Paso 5 — Sentry (errores)
-
-1. sentry.io > **Projects > Create Project** > plataforma **Next.js**.
-2. **Settings > Client Keys (DSN)** > copia el **DSN**.
-3. (Opcional, para source maps) **Settings > Auth Tokens** > crea uno con
-   scope `project:releases`.
-4. Guarda para el Paso 6:
-   - `NEXT_PUBLIC_SENTRY_DSN` = el DSN
-   - `SENTRY_ORG` = slug de la organizacion
-   - `SENTRY_PROJECT` = slug del proyecto
-   - `SENTRY_AUTH_TOKEN` = el token (opcional)
-
----
-
-## Paso 6 — Cargar las variables en Vercel
-
-Vercel > tu proyecto > **Settings > Environment Variables**. Pega cada par
-(Name / Value) para los entornos *Production*, *Preview* y *Development*:
-
-| Name | De donde |
+| Variable | Valor |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | Paso 1 |
-| `SUPABASE_URL` | Paso 2 |
-| `SUPABASE_SERVICE_ROLE_KEY` | Paso 2 |
-| `RESEND_API_KEY` | Paso 3 |
-| `LEADS_FROM_EMAIL` | Paso 3 |
-| `LEADS_TO_EMAIL` | Paso 3 |
-| `NEXT_PUBLIC_POSTHOG_KEY` | Paso 4 |
-| `NEXT_PUBLIC_POSTHOG_HOST` | Paso 4 |
-| `NEXT_PUBLIC_SENTRY_DSN` | Paso 5 |
-| `SENTRY_ORG` | Paso 5 |
-| `SENTRY_PROJECT` | Paso 5 |
-| `SENTRY_AUTH_TOKEN` | Paso 5 (opcional) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase → tu proyecto → **Project Settings → API Keys → `service_role`** (secreta, no la `anon`) |
+| `RESEND_API_KEY` | La que se generó al conectar Resend (restringida a enviar solo desde `victoriadesign.pe`) — guárdala si aún no lo hiciste, Resend no la vuelve a mostrar |
 
-Luego **Deployments > Redeploy** para que tomen efecto.
+Luego **Deployments → Redeploy** (o pide que Claude haga un push vacío
+para forzarlo).
 
-Para desarrollo local: copia `.env.example` a `.env.local` y pega ahi las mismas.
+Para desarrollo local: copia `.env.example` a `.env.local` y pega ahí las
+mismas dos claves.
 
 ---
 
-## Paso 7 — Probar que quedo bien
+## Probar que quedó bien
 
-1. Abre el sitio en Vercel > `/contacto` > envia el formulario.
-2. Supabase > **Table Editor > leads**: deberia aparecer la fila.
-3. Revisa tu correo (`LEADS_TO_EMAIL`) y el del remitente de prueba.
-4. PostHog > **Activity**: deberia verse `lead_enviado`.
+1. Abre `https://victoriadesign.pe/contacto` → envía el formulario.
+2. Supabase → **Table Editor → leads**: debería aparecer la fila.
+3. Revisa el correo en `LEADS_TO_EMAIL` (hoy `hola@victoriadesign.pe`) y
+   que el remitente de prueba reciba la auto-respuesta.
+4. PostHog → **Activity**: debería verse el evento `lead_enviado`.
+
+---
+
+## Referencia — de dónde salió cada cosa
+
+- **Supabase**: proyecto `victoriaramirezdesign's Project` (ya existía en
+  tu cuenta), tabla `leads` creada vía migración. URL:
+  `https://aefhxsezkolcxcoqylup.supabase.co`.
+- **Resend**: dominio `victoriadesign.pe` agregado y verificado (DKIM +
+  SPF en Cloudflare). API key `victoria-design-web`, permiso
+  `sending_access`, restringida a este dominio.
+- **PostHog / Sentry**: claves que pasaste por chat, ya en el código como
+  default. Si más adelante quieres usar otro proyecto de PostHog o
+  Sentry, completa `NEXT_PUBLIC_POSTHOG_KEY` / `NEXT_PUBLIC_SENTRY_DSN`
+  en Vercel — una env var siempre gana sobre el default.
 
 ---
 
 ## Falta decidir (para las siguientes fases)
 
-- **Login de clientes (Clerk)**: que van a ver los clientes al entrar?
+- **Login de clientes (Clerk)**: ¿qué van a ver los clientes al entrar?
   (¿avance del proyecto, archivos, facturas?). Con eso lo cableo.
-- **Pagos**: que se cobra exactamente y con que pasarela peruana
-  (Culqi / Izipay / Mercado Pago). Flow.cl no sirve en Peru.
-- **Dominio**: cuando compres `victoriadesign.pe`, DNS a Cloudflare y
-  se conecta a Vercel + Resend + (Zoho Mail para el correo).
+- **Pagos**: ¿qué se cobra exactamente y con qué pasarela peruana?
+  (Culqi / Izipay / Mercado Pago — Flow.cl no sirve en Perú).
