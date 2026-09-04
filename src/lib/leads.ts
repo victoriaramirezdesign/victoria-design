@@ -3,6 +3,7 @@
 // Mientras no existan las variables de entorno, el lead solo se registra en consola.
 
 import { getSupabaseAdmin } from "@/lib/supabase";
+import { LEADS_FROM_EMAIL_DEFAULT, LEADS_TO_EMAIL_DEFAULT } from "@/lib/env-defaults";
 
 export type LeadInput = {
   name: string;
@@ -72,8 +73,9 @@ async function storeInSupabase(lead: LeadClean): Promise<boolean> {
 /** Envia el aviso interno + la auto-respuesta al cliente via Resend. */
 async function sendEmails(lead: LeadClean): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
-  const from = process.env.LEADS_FROM_EMAIL; // ej. "Victoria Design <gerencia@victoriadesign.pe>"
-  const to = process.env.LEADS_TO_EMAIL; // correo interno del estudio
+  // Direcciones (no son secretas): con env var en Vercel la sobreescribe.
+  const from = process.env.LEADS_FROM_EMAIL ?? LEADS_FROM_EMAIL_DEFAULT;
+  const to = process.env.LEADS_TO_EMAIL ?? LEADS_TO_EMAIL_DEFAULT;
   if (!key || !from || !to) return false;
 
   const send = (payload: Record<string, unknown>) =>

@@ -13,3 +13,7 @@ export const SENTRY_DSN_DEFAULT =
   "https://40d6330a7964a19cb51eab99d49d4e67@o4512023393468416.ingest.us.sentry.io/4512029483597824";
 
 export const SUPABASE_URL_DEFAULT = "https://aefhxsezkolcxcoqylup.supabase.co";
+
+export const LEADS_FROM_EMAIL_DEFAULT = "Victoria Design <gerencia@victoriadesign.pe>";
+
+export const LEADS_TO_EMAIL_DEFAULT = "gerencia@victoriadesign.pe";
