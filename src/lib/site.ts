@@ -1,5 +1,5 @@
 // Configuracion central del sitio.
-// TODO(contenido): confirmar correo real, numero de WhatsApp y URLs de TikTok / Facebook.
+// TODO(contenido): confirmar numero de WhatsApp real y URLs de TikTok / Facebook.
 
 const url = process.env.NEXT_PUBLIC_SITE_URL ?? "https://victoriadesign.pe";
 
@@ -13,7 +13,7 @@ export const site = {
   locale: "es_PE",
   // Slogan de la marca (tomado de su Instagram)
   tagline: "Creatividad que conecta.",
-  email: "hola@victoriadesign.pe",
+  email: "gerencia@victoriadesign.pe",
   // Numero en formato internacional sin signos, para el enlace wa.me
   // TODO(contenido): reemplazar por el numero real
   whatsapp: "51999999999",

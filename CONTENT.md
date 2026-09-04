@@ -3,7 +3,7 @@
 Todo lo que hoy es "de ejemplo" en el sitio. A medida que me lo pases, lo reemplazo.
 
 ## 1. Datos del estudio (`src/lib/site.ts`)
-- [ ] Correo real (hoy: `hola@victoriadesign.pe`)
+- [x] Correo real: `gerencia@victoriadesign.pe`
 - [ ] Numero de WhatsApp real (formato: 51 + numero, sin espacios)
 - [x] Instagram: `@victoriadesign.pe`
 - [x] LinkedIn: perfil de Ana Victoria Ramirez Sanchez

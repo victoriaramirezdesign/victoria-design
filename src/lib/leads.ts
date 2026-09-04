@@ -72,7 +72,7 @@ async function storeInSupabase(lead: LeadClean): Promise<boolean> {
 /** Envia el aviso interno + la auto-respuesta al cliente via Resend. */
 async function sendEmails(lead: LeadClean): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
-  const from = process.env.LEADS_FROM_EMAIL; // ej. "Victoria Design <hola@victoriadesign.pe>"
+  const from = process.env.LEADS_FROM_EMAIL; // ej. "Victoria Design <gerencia@victoriadesign.pe>"
   const to = process.env.LEADS_TO_EMAIL; // correo interno del estudio
   if (!key || !from || !to) return false;
 

@@ -35,7 +35,7 @@ mismas dos claves.
 
 1. Abre `https://victoriadesign.pe/contacto` → envía el formulario.
 2. Supabase → **Table Editor → leads**: debería aparecer la fila.
-3. Revisa el correo en `LEADS_TO_EMAIL` (hoy `hola@victoriadesign.pe`) y
+3. Revisa el correo en `LEADS_TO_EMAIL` (hoy `gerencia@victoriadesign.pe`) y
    que el remitente de prueba reciba la auto-respuesta.
 4. PostHog → **Activity**: debería verse el evento `lead_enviado`.
 
