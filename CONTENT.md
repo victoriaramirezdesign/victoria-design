@@ -4,7 +4,7 @@ Todo lo que hoy es "de ejemplo" en el sitio. A medida que me lo pases, lo reempl
 
 ## 1. Datos del estudio (`src/lib/site.ts`)
 - [x] Correo real: `gerencia@victoriadesign.pe`
-- [ ] Numero de WhatsApp real (formato: 51 + numero, sin espacios)
+- [x] Numero de WhatsApp real: +51 984 167 763
 - [x] Instagram: `@victoriadesign.pe`
 - [x] LinkedIn: perfil de Ana Victoria Ramirez Sanchez
 - [ ] URLs de TikTok y Facebook (aun faltan)
