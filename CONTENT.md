@@ -16,9 +16,9 @@ Lo que hoy sigue en placeholder. A medida que me lo pases, lo reemplazo.
 - [ ] Bio final de cada uno (2-3 lineas; hoy hay una generica)
 - [ ] Foto de cada uno (cuadrada, min 800x800) -> `public/equipo/`
 
-## 3. Portafolio (`src/content/projects.ts`) — 12 clientes, 10 con logo
-Nombres, anos, tipo de servicio y **logos ya cargados** (PNG 1200x900 con
-fondo de la paleta del sitio, en `public/trabajos/<slug>/cover.png`).
+## 3. Portafolio (`src/content/projects.ts`) — 18 clientes, todos con logo
+Los 18 logos estan procesados en `public/trabajos/<slug>/cover.png`
+(PNG 1200x900, fondo de la paleta del sitio).
 
 Falta por cada proyecto:
 - [ ] **Rubro** (`sector`) — ej. "Odontologia", "Cafeteria"
@@ -26,14 +26,12 @@ Falta por cada proyecto:
 - [ ] Resultados con numeros, si los hay (opcional pero potente)
 - [ ] Imagenes del trabajo en si (hoy solo esta el logo)
 
-**Faltan los logos de:** Casa Villalta y La Red. Mientras tanto esas dos
-tarjetas muestran el nombre en texto.
+**De estos 6 solo llego el logo — falta ano y tipo de servicio**
+(hoy figuran como "Identidad corporativa" sin ano, hay que confirmarlo):
+Caraz Dulzura Helados, Carniprod, Ceprobio, FishGrox, Brand-in, ArizAle.
 
-**Logos que llegaron pero NO estan en la lista de 12** (ya convertidos y
-listos en `public/trabajos/`, solo hay que decidir si se agregan como
-proyecto): Caraz Helados, Ceprobio, FishGrox, Brand-in, Carniprod.
-Ojo: el archivo "GREENPROD LOGO 25 NOV.jpg" en realidad contiene el logo
-de **Carniprod**, no de GreenProd.
+> Ojo: el archivo "GREENPROD LOGO 25 NOV.jpg" en realidad contiene el
+> logo de **Carniprod**, no de GreenProd. Se uso como tal.
 
 ## 4. Paquetes (`src/content/packages.ts`) — NUEVO
 - [ ] Confirmar los 3 planes y que incluye cada uno
@@ -64,10 +62,13 @@ de **Carniprod**, no de GreenProd.
 - [ ] Favicon
 - [ ] Imagen para compartir en redes (OG, 1200x630)
 - [x] Color de acento: magenta `#a92a86` claro / `#d24da8` oscuro
-- [ ] **Tipografia**: la marca usa **EngraversGothic BT**, que es comercial
-      (Bitstream) y no se puede incrustar en web sin licencia de webfont.
-      Hoy el logotipo usa *Julius Sans One* como aproximacion libre.
-      Si compran la licencia web y me pasan el `.woff2`, lo cambio.
+- [x] **Tipografia**: la marca usa **EngraversGothic BT**, comercial
+      (Bitstream), que no se puede incrustar en web sin licencia de
+      webfont. Se busco la alternativa libre mas parecida y quedo
+      **Julius Sans One** (caja alta, ancha y ligera, mismo aire
+      "engraved"). Se aplica al logotipo y a todos los rotulos en
+      versalitas. Si compran la licencia web de EngraversGothic BT y me
+      pasan el `.woff2`, se cambia en `layout.tsx` por `next/font/local`.
 - [ ] Video corto para el hero (10-15s, mp4 sin audio) -> `public/` y
       apuntarlo en `site.heroVideo`
 

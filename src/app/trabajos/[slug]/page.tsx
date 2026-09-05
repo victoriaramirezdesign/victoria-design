@@ -60,10 +60,12 @@ export default async function ProjectPage(props: PageProps<"/trabajos/[slug]">) 
                   <dd className="mt-1 text-sm">{project.sector}</dd>
                 </div>
               ) : null}
-              <div>
-                <dt className="eyebrow">Ano</dt>
-                <dd className="mt-1 text-sm">{project.year}</dd>
-              </div>
+              {project.year ? (
+                <div>
+                  <dt className="eyebrow">Ano</dt>
+                  <dd className="mt-1 text-sm">{project.year}</dd>
+                </div>
+              ) : null}
               <div className="col-span-2">
                 <dt className="eyebrow">Servicios</dt>
                 <dd className="mt-1 text-sm">{project.services.join(", ")}</dd>

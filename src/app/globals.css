@@ -106,10 +106,12 @@
 }
 
 /* ---------- Utilidades propias ---------- */
+/* Rotulos en versalitas: usan la fuente del logotipo (aproximacion a
+   EngraversGothic BT), que es una caja alta ancha y ligera. */
 @utility eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-family: var(--font-wordmark);
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--muted);
 }

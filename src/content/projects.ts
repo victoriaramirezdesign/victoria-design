@@ -1,20 +1,23 @@
-// Clientes reales del estudio.
+// Clientes reales del estudio. Los logos ya estan procesados en
+// public/trabajos/<slug>/cover.png (PNG 4:3 con fondo de la paleta del sitio).
+//
 // TODO(contenido): por cada uno falta el rubro (`sector`), el resumen
-// (`summary`), las imagenes (`cover` -> public/trabajos/<slug>/) y, cuando
-// existan, los resultados con numeros.
+// (`summary`) y, cuando existan, los resultados con numeros.
+// Los 6 del final llegaron solo con logo: falta confirmar ano y servicio.
 
 export type Project = {
   slug: string;
   title: string;
   /** Rubro del cliente. TODO(contenido) */
   sector?: string;
-  year: string;
+  /** Ano o rango. Se omite cuando aun no esta confirmado. */
+  year?: string;
   category: string;
   /** 1-2 lineas sobre el proyecto. TODO(contenido) */
   summary?: string;
   services: string[];
   featured: boolean;
-  /** Ruta a la portada en /public/trabajos/<slug>/ */
+  /** Portada en /public/trabajos/<slug>/ */
   cover?: string;
   results?: { label: string; value: string }[];
 };
@@ -23,10 +26,12 @@ const IDENTIDAD = "Identidad corporativa";
 const SERVICIO = "Servicio corporativo";
 const AMBOS = "Identidad + servicio corporativo";
 
+const cover = (slug: string) => `/trabajos/${slug}/cover.png`;
+
 export const projects: Project[] = [
   {
     slug: "reyes-odontologia",
-    cover: "/trabajos/reyes-odontologia/cover.png",
+    cover: cover("reyes-odontologia"),
     title: "Reyes Odontologia Especializada",
     year: "2021 — actual",
     category: IDENTIDAD,
@@ -35,7 +40,7 @@ export const projects: Project[] = [
   },
   {
     slug: "greenprod",
-    cover: "/trabajos/greenprod/cover.png",
+    cover: cover("greenprod"),
     title: "GreenProd",
     year: "2024 — actual",
     category: IDENTIDAD,
@@ -44,7 +49,7 @@ export const projects: Project[] = [
   },
   {
     slug: "no-hay-2",
-    cover: "/trabajos/no-hay-2/cover.png",
+    cover: cover("no-hay-2"),
     title: "No Hay 2",
     year: "2018 — actual",
     category: IDENTIDAD,
@@ -53,7 +58,7 @@ export const projects: Project[] = [
   },
   {
     slug: "santo-grano",
-    cover: "/trabajos/santo-grano/cover.png",
+    cover: cover("santo-grano"),
     title: "Santo Grano",
     year: "2026",
     category: AMBOS,
@@ -62,7 +67,7 @@ export const projects: Project[] = [
   },
   {
     slug: "balik",
-    cover: "/trabajos/balik/cover.png",
+    cover: cover("balik"),
     title: "Balik",
     year: "2025 — actual",
     category: IDENTIDAD,
@@ -71,6 +76,7 @@ export const projects: Project[] = [
   },
   {
     slug: "casa-villalta",
+    cover: cover("casa-villalta"),
     title: "Casa Villalta",
     year: "2025",
     category: AMBOS,
@@ -79,7 +85,7 @@ export const projects: Project[] = [
   },
   {
     slug: "geocon-consult",
-    cover: "/trabajos/geocon-consult/cover.png",
+    cover: cover("geocon-consult"),
     title: "Geocon Consult",
     year: "2025",
     category: SERVICIO,
@@ -88,7 +94,7 @@ export const projects: Project[] = [
   },
   {
     slug: "fullnes",
-    cover: "/trabajos/fullnes/cover.png",
+    cover: cover("fullnes"),
     title: "Fullnes",
     year: "2024 — 2026",
     category: IDENTIDAD,
@@ -97,7 +103,7 @@ export const projects: Project[] = [
   },
   {
     slug: "thana",
-    cover: "/trabajos/thana/cover.png",
+    cover: cover("thana"),
     title: "Thana",
     year: "2023 — 2025",
     category: IDENTIDAD,
@@ -106,7 +112,7 @@ export const projects: Project[] = [
   },
   {
     slug: "nutriavo",
-    cover: "/trabajos/nutriavo/cover.png",
+    cover: cover("nutriavo"),
     title: "Nutriavo",
     year: "2022",
     category: AMBOS,
@@ -115,6 +121,7 @@ export const projects: Project[] = [
   },
   {
     slug: "la-red",
+    cover: cover("la-red"),
     title: "La Red",
     year: "2021 — 2023",
     category: IDENTIDAD,
@@ -123,9 +130,59 @@ export const projects: Project[] = [
   },
   {
     slug: "aprendiendo-juntos",
-    cover: "/trabajos/aprendiendo-juntos/cover.png",
+    cover: cover("aprendiendo-juntos"),
     title: "Aprendiendo Juntos",
     year: "2017 — 2023",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: false,
+  },
+
+  // --- Llegaron solo con logo. TODO(contenido): confirmar ano y servicio ---
+  {
+    slug: "caraz-helados",
+    cover: cover("caraz-helados"),
+    title: "Caraz Dulzura Helados",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: false,
+  },
+  {
+    slug: "carniprod",
+    cover: cover("carniprod"),
+    title: "Carniprod",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: false,
+  },
+  {
+    slug: "ceprobio",
+    cover: cover("ceprobio"),
+    title: "Ceprobio",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: false,
+  },
+  {
+    slug: "fishgrox",
+    cover: cover("fishgrox"),
+    title: "FishGrox",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: false,
+  },
+  {
+    slug: "brand-in",
+    cover: cover("brand-in"),
+    title: "Brand-in",
+    category: IDENTIDAD,
+    services: [IDENTIDAD],
+    featured: false,
+  },
+  {
+    slug: "arizale",
+    cover: cover("arizale"),
+    title: "ArizAle",
     category: IDENTIDAD,
     services: [IDENTIDAD],
     featured: false,

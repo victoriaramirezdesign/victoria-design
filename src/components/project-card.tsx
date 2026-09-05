@@ -39,9 +39,11 @@ export function ProjectCard({
         <h3 className="font-display text-xl transition-colors group-hover:text-accent">
           {project.title}
         </h3>
-        <span className="shrink-0 font-mono text-xs text-muted">
-          {project.year}
-        </span>
+        {project.year ? (
+          <span className="shrink-0 font-mono text-xs text-muted">
+            {project.year}
+          </span>
+        ) : null}
       </div>
       {project.sector ? (
         <p className="mt-1 text-sm text-muted">{project.sector}</p>
