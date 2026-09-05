@@ -8,7 +8,7 @@ import { posts } from "@/content/posts";
 export const metadata: Metadata = {
   title: "Notas",
   description:
-    "Ideas sobre marca, diseno y web para negocios que estan creciendo. Escrito por Victoria Design.",
+    "Ideas sobre marca, diseño y web para negocios que están creciendo. Escrito por Victoria Design.",
   alternates: { canonical: "/notas" },
 };
 
@@ -38,7 +38,7 @@ export default function NotasPage() {
           </Reveal>
           <Reveal delay={140}>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              Ideas practicas sobre identidad, web y como hacer que un negocio
+              Ideas prácticas sobre identidad, web y cómo hacer que un negocio
               se vea como lo que es.
             </p>
           </Reveal>
@@ -49,7 +49,7 @@ export default function NotasPage() {
                 <p className="font-display text-2xl">Pronto.</p>
                 <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted">
                   Estamos preparando las primeras notas. Mientras tanto, mira
-                  los trabajos o escribinos.
+                  los trabajos o escríbenos.
                 </p>
               </div>
             </Reveal>

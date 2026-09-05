@@ -12,7 +12,7 @@ export function Process() {
         <div className="max-w-2xl">
           <p className="eyebrow flex items-center gap-3">
             <span className="inline-block h-px w-8 bg-accent" />
-            Como trabajamos
+            Cómo trabajamos
           </p>
           <h2 className="mt-5 text-3xl leading-[1.05] sm:text-4xl md:text-5xl">
             Claro desde el hola hasta el lanzamiento.

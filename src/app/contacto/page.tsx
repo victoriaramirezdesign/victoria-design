@@ -7,7 +7,7 @@ import { site, socials, whatsappLink } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contacto",
   description:
-    "Cuentanos sobre tu proyecto. Respondemos en menos de 24 horas habiles con una idea de alcance y precio.",
+    "Cuéntanos sobre tu proyecto. Respondemos en menos de 24 horas hábiles con una idea de alcance y precio.",
   alternates: { canonical: "/contacto" },
 };
 
@@ -25,13 +25,13 @@ export default function ContactoPage() {
             </Reveal>
             <Reveal delay={80}>
               <h1 className="mt-6 text-4xl leading-[1.03] sm:text-5xl">
-                Contanos que tienes en mente.
+                Cuéntanos qué tienes en mente.
               </h1>
             </Reveal>
             <Reveal delay={140}>
               <p className="mt-6 text-base leading-relaxed text-muted">
-                Completa el formulario o escribinos directo. Leemos todo y
-                respondemos en menos de 24 horas habiles.
+                Completa el formulario o escríbenos directo. Leemos todo y
+                respondemos en menos de 24 horas hábiles.
               </p>
             </Reveal>
 

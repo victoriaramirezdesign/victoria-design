@@ -8,7 +8,7 @@ export const site = {
   domain: "victoriadesign.pe",
   url,
   description:
-    "Estudio creativo de diseno y desarrollo web en Peru. Creamos marcas, piezas y sitios que ayudan a emprendedores y negocios a destacar.",
+    "Estudio creativo de diseño y desarrollo web en Perú. Creamos marcas, piezas y sitios que ayudan a emprendedores y negocios a destacar.",
   locale: "es_PE",
   // Slogan de la marca (tomado de su Instagram)
   tagline: "Creatividad que conecta.",

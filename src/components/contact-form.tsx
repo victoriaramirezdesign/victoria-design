@@ -10,8 +10,8 @@ const projectTypes = [
   "Identidad de marca",
   "Sitio web / landing",
   "Tienda online",
-  "Rediseno de sitio actual",
-  "Campana / contenido",
+  "Rediseño de sitio actual",
+  "Campaña / contenido",
   "Otro / no estoy seguro",
 ];
 
@@ -19,7 +19,7 @@ const budgets = [
   "Menos de S/ 2,000",
   "S/ 2,000 - S/ 5,000",
   "S/ 5,000 - S/ 12,000",
-  "Mas de S/ 12,000",
+  "Más de S/ 12,000",
   "Prefiero conversarlo",
 ];
 
@@ -64,7 +64,7 @@ export function ContactForm() {
       <div className="rounded-2xl border border-line bg-bg-elev p-8">
         <p className="font-display text-2xl">Mensaje recibido.</p>
         <p className="mt-3 text-sm leading-relaxed text-muted">
-          Gracias por escribir. Te respondemos en menos de 24 horas habiles con
+          Gracias por escribir. Te respondemos en menos de 24 horas hábiles con
           una primera idea de alcance y siguientes pasos.
         </p>
         <button
@@ -105,12 +105,12 @@ export function ContactForm() {
       </div>
 
       <label className="grid gap-2">
-        <span className="text-sm text-fg">Contanos sobre el proyecto</span>
+        <span className="text-sm text-fg">Cuéntanos sobre el proyecto</span>
         <textarea
           name="message"
           required
           rows={5}
-          placeholder="Que negocio es, que necesitas y para cuando."
+          placeholder="Qué negocio es, qué necesitas y para cuándo."
           className="rounded-xl border border-line bg-bg px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/60 focus:border-accent"
         />
       </label>
@@ -125,7 +125,7 @@ export function ContactForm() {
         <Button type="submit" disabled={status === "loading"}>
           {status === "loading" ? "Enviando..." : "Enviar mensaje"}
         </Button>
-        <p className="text-xs text-muted">Respuesta en 24 h habiles.</p>
+        <p className="text-xs text-muted">Respuesta en 24 h hábiles.</p>
       </div>
     </form>
   );

@@ -6,7 +6,7 @@ Lo que hoy sigue en placeholder. A medida que me lo pases, lo reemplazo.
 - [x] Correo: `gerencia@victoriadesign.pe`
 - [x] WhatsApp: +51 984 167 763
 - [x] Instagram, TikTok, Facebook, LinkedIn
-- [ ] Ciudad / base del estudio (hoy dice solo "Peru")
+- [x] Ciudad / base del estudio: Nuevo Chimbote - Peru
 - [ ] Link de Calendly/Cal.com para "Agendar llamada" (`site.bookingUrl`,
       hoy vacio = el boton no aparece)
 

@@ -17,7 +17,7 @@ export function Studio() {
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted">
               Trabajas directo con quienes hacen el trabajo. Menos reuniones,
-              respuestas rapidas y decisiones que no se diluyen.
+              respuestas rápidas y decisiones que no se diluyen.
             </p>
           </div>
 

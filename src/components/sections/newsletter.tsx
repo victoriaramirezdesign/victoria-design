@@ -45,14 +45,14 @@ export function Newsletter() {
           <div>
             <p className="eyebrow flex items-center gap-3">
               <span className="inline-block h-px w-8 bg-accent" />
-              Guia gratis
+              Guía gratis
             </p>
             <h2 className="mt-5 text-3xl leading-[1.05] sm:text-4xl">
               5 errores de marca que frenan a un negocio nuevo.
             </h2>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted">
               {/* TODO(contenido): confirmar el lead magnet y prepararlo en PDF. */}
-              Dejanos tu correo y te la enviamos. Sin spam: solo cosas utiles
+              Déjanos tu correo y te la enviamos. Sin spam: solo cosas útiles
               sobre marca y web, cada tanto.
             </p>
           </div>
@@ -61,7 +61,7 @@ export function Newsletter() {
             <div className="rounded-2xl border border-line bg-bg p-7">
               <p className="font-display text-xl">Listo, quedaste dentro.</p>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                Te escribimos al correo con la guia. Revisa tambien spam por si
+                Te escribimos al correo con la guía. Revisa también spam por si
                 acaso.
               </p>
             </div>
@@ -88,7 +88,7 @@ export function Newsletter() {
                   />
                 </label>
                 <Button type="submit" disabled={status === "loading"}>
-                  {status === "loading" ? "Enviando..." : "Quiero la guia"}
+                  {status === "loading" ? "Enviando..." : "Quiero la guía"}
                 </Button>
               </div>
 

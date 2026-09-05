@@ -12,11 +12,8 @@ export function FeaturedWork() {
           <div className="max-w-xl">
             <p className="eyebrow flex items-center gap-3">
               <span className="inline-block h-px w-8 bg-accent" />
-              Trabajo seleccionado
+              Proyectos culminados
             </p>
-            <h2 className="mt-5 text-3xl leading-[1.05] sm:text-4xl md:text-5xl">
-              Proyectos que ya estan vivos.
-            </h2>
           </div>
           <Link
             href="/trabajos"

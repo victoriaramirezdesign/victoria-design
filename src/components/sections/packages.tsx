@@ -15,13 +15,13 @@ export function Packages() {
         <div className="max-w-2xl">
           <p className="eyebrow flex items-center gap-3">
             <span className="inline-block h-px w-8 bg-accent" />
-            Como trabajamos contigo
+            Cómo trabajamos contigo
           </p>
           <h2 className="mt-5 text-3xl leading-[1.05] sm:text-4xl md:text-5xl">
-            Elige por donde empezar.
+            Elige por dónde empezar.
           </h2>
           <p className="mt-5 text-base leading-relaxed text-muted">
-            Cada proyecto se cotiza cerrado: sabes cuanto cuesta y que recibes
+            Cada proyecto se cotiza cerrado: sabes cuánto cuesta y qué recibes
             antes de empezar. Sin costos que aparecen a mitad de camino.
           </p>
         </div>
@@ -39,7 +39,7 @@ export function Packages() {
             >
               {pkg.highlighted ? (
                 <span className="mb-4 self-start rounded-full bg-accent px-3 py-1 text-xs font-medium text-accent-fg">
-                  Mas pedido
+                  Más pedido
                 </span>
               ) : null}
 
@@ -50,7 +50,7 @@ export function Packages() {
 
               <p className="mt-6 font-display text-3xl">
                 {pkg.price === null ? (
-                  <span className="text-fg">Segun proyecto</span>
+                  <span className="text-fg">Según proyecto</span>
                 ) : (
                   <>
                     <span className="text-base text-muted">desde </span>

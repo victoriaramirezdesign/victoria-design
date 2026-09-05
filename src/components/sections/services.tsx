@@ -10,14 +10,14 @@ export function Services() {
           <div className="md:sticky md:top-28 md:self-start">
             <p className="eyebrow flex items-center gap-3">
               <span className="inline-block h-px w-8 bg-accent" />
-              Que hacemos
+              Qué hacemos
             </p>
             <h2 className="mt-5 text-3xl leading-[1.05] sm:text-4xl">
               Un equipo, todo el recorrido de tu marca.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted">
-              No tercerizamos. Diseno y desarrollo trabajan juntos desde el
-              primer dia, asi nada se pierde en el camino.
+              No tercerizamos. Diseño y desarrollo trabajan juntos desde el
+              primer día, así nada se pierde en el camino.
             </p>
           </div>
 

@@ -7,10 +7,10 @@ export default function NotFound() {
       <Container className="text-center">
         <p className="eyebrow">Error 404</p>
         <h1 className="mx-auto mt-5 max-w-xl text-4xl leading-[1.05] sm:text-5xl">
-          Esta pagina no existe (todavia).
+          Esta página no existe (todavía).
         </h1>
         <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-muted">
-          El enlace puede estar roto o la pagina se movio. Volvamos a lo seguro.
+          El enlace puede estar roto o la página se movió. Volvamos a lo seguro.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <ButtonLink href="/">Ir al inicio</ButtonLink>

@@ -32,7 +32,7 @@ export const projects: Project[] = [
   {
     slug: "reyes-odontologia",
     cover: cover("reyes-odontologia"),
-    title: "Reyes Odontologia Especializada",
+    title: "Reyes Odontología Especializada",
     year: "2021 — actual",
     category: IDENTIDAD,
     services: [IDENTIDAD],

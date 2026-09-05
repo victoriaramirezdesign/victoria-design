@@ -132,23 +132,6 @@
   transform: none;
 }
 
-@keyframes vd-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-track {
-  animation: vd-marquee 34s linear infinite;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -158,10 +141,6 @@
     opacity: 1;
     transform: none;
     transition: none;
-  }
-
-  .marquee-track {
-    animation: none;
   }
 
   *,

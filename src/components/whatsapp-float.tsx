@@ -5,7 +5,7 @@ import { whatsappLink } from "@/lib/site";
 import { track } from "@/lib/analytics";
 
 /**
- * Boton flotante de WhatsApp. Aparece despues del primer scroll para no
+ * Botón flotante de WhatsApp. Aparece después del primer scroll para no
  * competir con el CTA del hero.
  */
 export function WhatsappFloat() {
@@ -23,7 +23,7 @@ export function WhatsappFloat() {
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Escribinos por WhatsApp"
+      aria-label="Escríbenos por WhatsApp"
       onClick={() => track("whatsapp_click", { origen: "boton_flotante" })}
       className={`fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-medium text-[#0b3d25] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 ${
         visible

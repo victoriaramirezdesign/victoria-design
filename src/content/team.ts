@@ -10,15 +10,15 @@ export type Member = {
 
 export const team: Member[] = [
   {
-    name: "Ana Victoria Ramirez Sanchez",
-    role: "Diseno y direccion creativa",
-    bio: "Traduce cada negocio en una imagen con personalidad: identidad, piezas graficas y contenido publicitario que conecta.",
-    focus: ["Identidad de marca", "Diseno grafico", "Direccion de arte", "Contenido"],
+    name: "Ana Victoria Ramírez Sánchez",
+    role: "Diseño y dirección creativa",
+    bio: "Traduce cada negocio en una imagen con personalidad: identidad, piezas gráficas y contenido publicitario que conecta.",
+    focus: ["Identidad de marca", "Diseño gráfico", "Dirección de arte", "Contenido"],
   },
   {
-    name: "Azet Ramirez",
-    role: "Desarrollo web y tecnica",
-    bio: "Se encarga de que todo funcione, cargue rapido y sea facil de mantener. Next.js, integraciones y datos.",
-    focus: ["Desarrollo web", "Integraciones", "Performance", "Analitica"],
+    name: "Azet Ramírez",
+    role: "Desarrollo web y técnica",
+    bio: "Se encarga de que todo funcione, cargue rápido y sea fácil de mantener. Next.js, integraciones y datos.",
+    focus: ["Desarrollo web", "Integraciones", "Performance", "Analítica"],
   },
 ];

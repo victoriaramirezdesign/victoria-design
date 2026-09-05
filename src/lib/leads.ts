@@ -22,7 +22,7 @@ export function validateLead(body: unknown):
   | { ok: true; data: LeadClean }
   | { ok: false; error: string } {
   if (typeof body !== "object" || body === null) {
-    return { ok: false, error: "Cuerpo invalido." };
+    return { ok: false, error: "Cuerpo inválido." };
   }
   const b = body as Record<string, unknown>;
 
@@ -38,9 +38,9 @@ export function validateLead(body: unknown):
   const message = String(b.message ?? "").trim();
 
   if (name.length < 2) return { ok: false, error: "Ingresa tu nombre." };
-  if (!EMAIL_RE.test(email)) return { ok: false, error: "Ingresa un correo valido." };
+  if (!EMAIL_RE.test(email)) return { ok: false, error: "Ingresa un correo válido." };
   if (!projectType) return { ok: false, error: "Elige el tipo de proyecto." };
-  if (message.length < 10) return { ok: false, error: "Contanos un poco mas sobre el proyecto." };
+  if (message.length < 10) return { ok: false, error: "Cuéntanos un poco más sobre el proyecto." };
   if (message.length > 4000) return { ok: false, error: "El mensaje es demasiado largo." };
 
   return {
@@ -111,7 +111,7 @@ async function sendEmails(lead: LeadClean): Promise<boolean> {
       `Hola ${lead.name},`,
       "",
       "Gracias por escribir a Victoria Design. Ya tenemos tu mensaje y te",
-      "responderemos en menos de 24 horas habiles con una primera idea de",
+      "responderemos en menos de 24 horas hábiles con una primera idea de",
       "alcance y siguientes pasos.",
       "",
       "Un abrazo,",

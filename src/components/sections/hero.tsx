@@ -4,9 +4,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { site } from "@/lib/site";
 
 const facts = [
-  { k: "Base", v: "Peru" },
-  { k: "Equipo", v: "Diseno + Codigo" },
-  { k: "Formato", v: "Precio cerrado" },
+  { k: "Base", v: "Nuevo Chimbote - Perú" },
+  { k: "Equipo", v: "Diseño + Código" },
 ];
 
 export function Hero() {
@@ -47,14 +46,14 @@ export function Hero() {
 
         <Reveal delay={90}>
           <h1 className="mt-7 max-w-4xl text-[2.6rem] leading-[1.03] sm:text-6xl md:text-7xl">
-            Diseno y codigo que{" "}
+            Diseño y código que{" "}
             <span className="text-accent">hacen crecer</span> tu marca.
           </h1>
         </Reveal>
 
         <Reveal delay={160}>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted">
-            Somos un estudio creativo: diseno grafico, identidad y desarrollo
+            Somos un estudio creativo: diseño gráfico, identidad y desarrollo
             web. Ayudamos a emprendedores y marcas a destacar, en un solo equipo
             y con precio cerrado.
           </p>
@@ -80,7 +79,7 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={320}>
-          <dl className="mt-16 grid max-w-lg grid-cols-3 gap-6 border-t border-line pt-6">
+          <dl className="mt-16 grid max-w-lg grid-cols-2 gap-6 border-t border-line pt-6">
             {facts.map((f) => (
               <div key={f.k}>
                 <dt className="eyebrow">{f.k}</dt>

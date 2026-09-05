@@ -25,12 +25,12 @@ export default function TrabajosPage() {
           </Reveal>
           <Reveal delay={80}>
             <h1 className="mt-6 max-w-3xl text-4xl leading-[1.03] sm:text-6xl">
-              Cada proyecto, una marca que decidio verse en serio.
+              Cada proyecto, una marca que decidió verse en serio.
             </h1>
           </Reveal>
           <Reveal delay={140}>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              Una seleccion de trabajos de diseno y desarrollo. Los casos con
+              Una selección de trabajos de diseño y desarrollo. Los casos con
               contenido de ejemplo se reemplazan a medida que publicamos los
               reales.
             </p>

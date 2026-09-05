@@ -17,13 +17,13 @@ export function ContactCta() {
         </Reveal>
         <Reveal delay={80}>
           <h2 className="mx-auto mt-5 max-w-3xl text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
-            Tienes un proyecto en mente?{" "}
-            <span className="text-accent">Contanos.</span>
+            ¿Tienes un proyecto en mente?{" "}
+            <span className="text-accent">Cuéntanos.</span>
           </h2>
         </Reveal>
         <Reveal delay={140}>
           <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
-            Escribinos y en 24 horas te respondemos con una idea de alcance,
+            Escríbenos y en 24 horas te respondemos con una idea de alcance,
             tiempos y precio. La primera llamada es gratis.
           </p>
         </Reveal>

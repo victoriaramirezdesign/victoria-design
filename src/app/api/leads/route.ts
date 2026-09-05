@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "JSON invalido." }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "JSON inválido." }, { status: 400 });
   }
 
   const result = validateLead(body);

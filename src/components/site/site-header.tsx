@@ -65,7 +65,7 @@ export function SiteHeader() {
           </ButtonLink>
           <button
             type="button"
-            aria-label={open ? "Cerrar menu" : "Abrir menu"}
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
             className="inline-flex size-9 items-center justify-center rounded-full border border-line md:hidden"

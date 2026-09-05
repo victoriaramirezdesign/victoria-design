@@ -39,24 +39,24 @@ const julius = Julius_Sans_One({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Estudio de diseno y desarrollo web en Peru`,
+    default: `${site.name} — Estudio de diseño y desarrollo web en Perú`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
   keywords: [
-    "diseno web Peru",
+    "diseño web Perú",
     "desarrollo web",
     "landing page",
     "identidad de marca",
-    "tienda online Peru",
-    "estudio de diseno",
+    "tienda online Perú",
+    "estudio de diseño",
   ],
   openGraph: {
     type: "website",
     locale: site.locale,
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — Diseno y desarrollo web`,
+    title: `${site.name} — Diseño y desarrollo web`,
     description: site.description,
   },
   twitter: {

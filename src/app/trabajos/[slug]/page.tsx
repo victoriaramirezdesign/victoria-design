@@ -62,7 +62,7 @@ export default async function ProjectPage(props: PageProps<"/trabajos/[slug]">) 
               ) : null}
               {project.year ? (
                 <div>
-                  <dt className="eyebrow">Ano</dt>
+                  <dt className="eyebrow">Año</dt>
                   <dd className="mt-1 text-sm">{project.year}</dd>
                 </div>
               ) : null}
@@ -104,11 +104,11 @@ export default async function ProjectPage(props: PageProps<"/trabajos/[slug]">) 
           <p className="mt-14 max-w-2xl text-sm leading-relaxed text-muted">
             {/* TODO(contenido): caso de estudio completo (reto, proceso,
             resultado) con imagenes reales del proyecto. */}
-            El caso de estudio detallado de este proyecto esta en preparacion.
+            El caso de estudio detallado de este proyecto está en preparación.
           </p>
 
           <div className="mt-12 flex flex-wrap items-center gap-4 border-t border-line pt-8">
-            <ButtonLink href="/contacto">Quiero algo asi</ButtonLink>
+            <ButtonLink href="/contacto">Quiero algo así</ButtonLink>
             <Link
               href={`/trabajos/${next.slug}`}
               className="text-sm text-muted transition-colors hover:text-fg"

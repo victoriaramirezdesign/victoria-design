@@ -18,7 +18,7 @@ export function Instagram() {
               En redes
             </p>
             <h2 className="mt-5 text-3xl leading-[1.05] sm:text-4xl md:text-5xl">
-              Lo ultimo del estudio.
+              Lo último del estudio.
             </h2>
           </div>
           <a
@@ -61,7 +61,7 @@ export function Instagram() {
               className="mt-12 flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-line bg-bg-elev px-6 py-16 text-center transition-colors hover:border-accent"
             >
               <span className="font-display text-2xl">
-                Segui el dia a dia en Instagram
+                Sigue el día a día en Instagram
               </span>
               <span className="text-sm text-muted">
                 Piezas, procesos y trabajos nuevos cada semana.
