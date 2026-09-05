@@ -4,6 +4,7 @@ import "./globals.css";
 import { site } from "@/lib/site";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
+import { SiteChrome } from "@/components/site/site-chrome";
 import { WhatsappFloat } from "@/components/whatsapp-float";
 import { themeInitScript } from "@/components/ui/theme-toggle";
 
@@ -84,12 +85,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Saltar al contenido
         </a>
-        <SiteHeader />
+        <SiteChrome>
+          <SiteHeader />
+        </SiteChrome>
         <main id="contenido" className="flex-1">
           {children}
         </main>
-        <SiteFooter />
-        <WhatsappFloat />
+        <SiteChrome>
+          <SiteFooter />
+          <WhatsappFloat />
+        </SiteChrome>
       </body>
     </html>
   );
