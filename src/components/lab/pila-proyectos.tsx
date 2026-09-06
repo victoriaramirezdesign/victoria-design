@@ -57,11 +57,15 @@ export function PilaProyectos() {
     pintar();
     window.addEventListener("scroll", alScroll, { passive: true });
     window.addEventListener("resize", alScroll);
+    // Volviendo de una pestana en segundo plano el rAF estuvo congelado:
+    // hay que repintar o los valores se quedan viejos.
+    document.addEventListener("visibilitychange", alScroll);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", alScroll);
       window.removeEventListener("resize", alScroll);
+      document.removeEventListener("visibilitychange", alScroll);
     };
   }, []);
 

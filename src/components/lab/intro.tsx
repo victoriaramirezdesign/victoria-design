@@ -1,74 +1,84 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "@/components/lab/motion";
+import { marcarListo, useReducedMotion } from "@/components/lab/motion";
 import { site } from "@/lib/site";
 
 /**
- * Cortina de entrada: contador 0-100 y el logotipo, luego la cortina
- * sube y deja ver el hero. Con prefers-reduced-motion no se monta.
+ * Cortina de entrada. Tres tiempos, para que no se sienta un simple
+ * fundido: el contador llega a 100, el nucleo (logotipo + barra) se va
+ * hacia arriba, y recien entonces la cortina sube en dos planos con un
+ * filo magenta. Al arrancar la subida se avisa al resto de la pagina
+ * (marcarListo) para que el hero entre justo detras, no antes.
+ *
+ * Con prefers-reduced-motion no se monta y la pagina se revela de una.
  */
+
+const CUENTA = 1100;
+const SALIDA = 260; // el nucleo se retira antes de que suba la cortina
+
 export function Intro() {
   const [n, setN] = useState(0);
-  const [done, setDone] = useState(false);
-  const [gone, setGone] = useState(false);
+  const [saliendo, setSaliendo] = useState(false);
+  const [alzando, setAlzando] = useState(false);
+  const [fuera, setFuera] = useState(false);
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced) {
+      marcarListo();
+      return;
+    }
 
-    const prev = document.body.style.overflow;
+    const previo = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     let raf = 0;
-    const start = performance.now();
-    const dur = 1300;
+    const inicio = performance.now();
 
-    const tick = (now: number) => {
-      const p = Math.min((now - start) / dur, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setN(Math.round(eased * 100));
+    const tick = (ahora: number) => {
+      const p = Math.min((ahora - inicio) / CUENTA, 1);
+      setN(Math.round((1 - Math.pow(1 - p, 3)) * 100));
       if (p < 1) raf = requestAnimationFrame(tick);
     };
-
     raf = requestAnimationFrame(tick);
 
-    // La cortina se levanta con un timeout, no con el rAF: en una pestana
-    // en segundo plano el rAF se congela y la pagina quedaria tapada.
-    const alza = setTimeout(() => setDone(true), dur);
+    // Los tiempos van por setTimeout y no por rAF: en una pestana en
+    // segundo plano el rAF se congela y la cortina no se levantaria.
+    const t1 = setTimeout(() => setSaliendo(true), CUENTA);
+    const t2 = setTimeout(() => setAlzando(true), CUENTA + SALIDA);
 
     return () => {
       cancelAnimationFrame(raf);
-      clearTimeout(alza);
-      document.body.style.overflow = prev;
+      clearTimeout(t1);
+      clearTimeout(t2);
+      document.body.style.overflow = previo;
     };
   }, [reduced]);
 
   useEffect(() => {
-    if (!done) return;
+    if (!alzando) return;
     document.body.style.overflow = "";
-    // Se desmonta recien cuando termina la transicion de la cortina.
-    const t = setTimeout(() => setGone(true), 1400);
+    // El hero arranca su entrada con la cortina ya en movimiento.
+    marcarListo();
+    const t = setTimeout(() => setFuera(true), 1500);
     return () => clearTimeout(t);
-  }, [done]);
+  }, [alzando]);
 
-  if (gone || reduced) return null;
+  if (fuera || reduced) return null;
 
   return (
-    <div className="v-intro" data-done={done} aria-hidden>
-      <div className="flex flex-col items-center gap-8">
-        <p className="font-wordmark text-2xl uppercase tracking-[0.34em] sm:text-3xl">
-          {site.name}
-        </p>
-        <div className="h-px w-40 overflow-hidden bg-[var(--v-line)]">
-          <div
-            className="h-full bg-[var(--v-magenta)] transition-[width] duration-100 ease-linear"
-            style={{ width: `${n}%` }}
-          />
-        </div>
-        <p className="v-mono text-xs tracking-[0.3em] text-[var(--v-fog-dim)]">
-          {String(n).padStart(3, "0")}
-        </p>
+    <div className="v-intro" data-alzando={alzando} aria-hidden>
+      {/* Dos planos: el de atras sale un pelo despues y da profundidad */}
+      <span className="v-intro__plano v-intro__plano--b" />
+      <span className="v-intro__plano v-intro__plano--a" />
+
+      <div className="v-intro__nucleo" data-saliendo={saliendo}>
+        <p className="v-intro__marca">{site.name}</p>
+        <span className="v-intro__barra">
+          <i style={{ transform: `scaleX(${n / 100})` }} />
+        </span>
+        <p className="v-intro__num">{String(n).padStart(3, "0")}</p>
       </div>
     </div>
   );

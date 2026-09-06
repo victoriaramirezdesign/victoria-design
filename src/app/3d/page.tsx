@@ -6,6 +6,8 @@ import { Intro } from "@/components/lab/intro";
 import { Secuencia } from "@/components/lab/secuencia";
 import { BarraLogos } from "@/components/lab/barra-logos";
 import { NavLab } from "@/components/lab/nav-lab";
+import { ZonaSuperior } from "@/components/lab/zona-superior";
+import { ShaderField } from "@/components/lab/shader-field";
 import {
   BadgeBorrador,
   Cifras,
@@ -44,8 +46,16 @@ export default function Borrador3DPage() {
       <span className="v-grain" aria-hidden />
 
       <NavLab />
-      <Hero />
-      <Secuencia />
+
+      {/* Hero y secuencia comparten fondo: la entrega entre los dos no
+          se ve como un corte, sino como un mismo plano continuo. */}
+      <ZonaSuperior>
+        <div className="v-top__fondo" aria-hidden>
+          <ShaderField />
+        </div>
+        <Hero />
+        <Secuencia />
+      </ZonaSuperior>
       <Manifiesto />
       <Servicios />
       <BarraLogos />

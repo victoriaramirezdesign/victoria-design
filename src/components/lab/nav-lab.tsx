@@ -31,6 +31,21 @@ export function NavLab() {
     return () => io.disconnect();
   }, []);
 
+  // El filo y el velo aparecen al despegar del tope. Se escribe directo
+  // sobre el nodo: no hace falta re-renderizar en cada scroll.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const marcar = () => {
+      el.dataset.pegado = String(window.scrollY > 24);
+    };
+
+    marcar();
+    window.addEventListener("scroll", marcar, { passive: true });
+    return () => window.removeEventListener("scroll", marcar);
+  }, []);
+
   return (
     <header ref={ref} className="v-nav" data-claro={claro}>
       <div

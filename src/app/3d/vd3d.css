@@ -439,24 +439,184 @@
   );
 }
 
-/* ---------- Intro ---------- */
+/* ---------- Cortina de entrada ----------
+   Sube en dos planos con un filo iridiscente. El nucleo se retira antes,
+   asi la salida tiene dos tiempos y no se siente un fundido plano. */
 .v-intro {
   position: fixed;
   inset: 0;
   z-index: 90;
   display: grid;
   place-items: center;
-  background: var(--v-ink);
-  transition:
-    clip-path 1.1s var(--v-ease),
-    opacity 0.6s linear 0.7s;
-  clip-path: inset(0 0 0 0);
 }
 
-.v-intro[data-done="true"] {
-  clip-path: inset(0 0 100% 0);
-  opacity: 0;
+.v-intro[data-alzando="true"] {
   pointer-events: none;
+}
+
+.v-intro__plano {
+  position: absolute;
+  inset: 0;
+  transform: translateY(0);
+  transition: transform 1.25s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.v-intro__plano--a {
+  background: var(--v-ink);
+}
+
+/* El plano de atras sale un instante despues y abre profundidad */
+.v-intro__plano--b {
+  background: linear-gradient(180deg, var(--v-ink-3), var(--v-ink));
+  transition-delay: 0.1s;
+}
+
+.v-intro__plano--a::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--v-ink-00),
+    var(--v-magenta),
+    var(--v-violet),
+    var(--v-ink-00)
+  );
+  opacity: 0;
+  transition: opacity 0.25s linear;
+}
+
+.v-intro[data-alzando="true"] .v-intro__plano {
+  transform: translateY(-101%);
+}
+
+.v-intro[data-alzando="true"] .v-intro__plano--a::after {
+  opacity: 1;
+}
+
+.v-intro__nucleo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.9rem;
+  transition:
+    opacity 0.45s var(--v-ease),
+    transform 0.75s var(--v-ease);
+}
+
+.v-intro__nucleo[data-saliendo="true"] {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.97);
+}
+
+.v-intro__marca {
+  font-family: var(--font-julius), "Copperplate Gothic Light", system-ui,
+    sans-serif;
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  /* Compensa el espaciado que el ultimo caracter deja a la derecha */
+  text-indent: 0.34em;
+}
+
+.v-intro__barra {
+  display: block;
+  width: min(11rem, 44vw);
+  height: 1px;
+  background: var(--v-line);
+  overflow: hidden;
+}
+
+.v-intro__barra i {
+  display: block;
+  height: 100%;
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--v-magenta), var(--v-violet));
+}
+
+.v-intro__num {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-indent: 0.32em;
+  color: var(--v-fog-dim);
+}
+
+/* ---------- Zona superior: hero y secuencia sobre un mismo fondo ---------- */
+.v-top {
+  position: relative;
+  --p: 0;
+  --pf: 1;
+}
+
+/* Se queda pegado detras de las dos secciones. El margen negativo evita
+   que ocupe alto propio en el flujo. */
+.v-top__fondo {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: 100vh;
+  margin-bottom: -100vh;
+  opacity: var(--pf);
+  pointer-events: none;
+}
+
+/* ---------- Portada ---------- */
+.v-portada {
+  position: relative;
+  z-index: 1;
+  height: 125vh;
+}
+
+.v-portada__fijo {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.v-portada__cont {
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 6rem 1.25rem 4rem;
+  text-align: center;
+  /* Se retira antes de que llegue la secuencia: la entrega es un cruce,
+     no un corte. */
+  opacity: calc(1 - var(--p));
+  transform: translateY(calc(var(--p) * -70px))
+    scale(calc(1 - var(--p) * 0.06));
+  will-change: opacity, transform;
+}
+
+@media (min-width: 640px) {
+  .v-portada__cont {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.v-portada__cue {
+  position: absolute;
+  bottom: 2.25rem;
+  left: 50%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: calc(1 - var(--p) * 2.4);
+}
+
+@media (min-width: 640px) {
+  .v-portada__cue {
+    display: flex;
+  }
 }
 
 /* ---------- Reduccion de movimiento ----------
@@ -835,6 +995,7 @@
 
 .v-seq {
   position: relative;
+  z-index: 1;
 }
 
 .v-seq__fijo {
@@ -1586,6 +1747,35 @@
 
 .v-nav__volver:hover {
   color: currentColor;
+}
+
+.v-navveil {
+  opacity: 0;
+  transition: opacity 0.5s var(--v-ease);
+}
+
+.v-nav[data-pegado="true"] .v-navveil {
+  opacity: 1;
+}
+
+.v-nav::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--v-line);
+  opacity: 0;
+  transition: opacity 0.5s var(--v-ease);
+  pointer-events: none;
+}
+
+.v-nav[data-pegado="true"]::after {
+  opacity: 1;
+}
+
+.v-nav[data-claro="true"]::after {
+  background: rgba(4, 3, 10, 0.12);
 }
 
 .v-navveil--claro {

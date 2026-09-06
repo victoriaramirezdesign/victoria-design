@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { ShaderField } from "@/components/lab/shader-field";
 import { PilaProyectos } from "@/components/lab/pila-proyectos";
 import { TiltCard } from "@/components/lab/tilt-card";
 import { Rail } from "@/components/lab/rail";
@@ -14,55 +13,52 @@ import { site, whatsappLink } from "@/lib/site";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden text-center">
-      <div className="absolute inset-0 -z-10">
-        <ShaderField />
-      </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-t from-[var(--v-ink)] to-transparent" />
-
-      <div className="mx-auto w-full max-w-4xl px-5 pb-28 pt-32 sm:px-8">
-        <Rise>
-          <p className="v-label flex items-center justify-center gap-4">
-            <span className="inline-block h-px w-10 bg-[var(--v-magenta)]" />
-            Estudio creativo · Nuevo Chimbote, Perú
-          </p>
-        </Rise>
-
-        <h1 className="v-display mx-auto mt-9 max-w-[15ch] text-[2.9rem] sm:text-[4.6rem] lg:text-[6rem]">
-          <Words text="Tu marca, armada" />
-          <Rise as="span" delay={520} className="mt-2">
-            <span className="v-grad">capa por capa.</span>
+    <section className="v-portada">
+      <div className="v-portada__fijo">
+        <div className="v-portada__cont">
+          <Rise>
+            <p className="v-label flex items-center justify-center gap-4">
+              <span className="inline-block h-px w-10 bg-[var(--v-magenta)]" />
+              Estudio creativo · Nuevo Chimbote, Perú
+            </p>
           </Rise>
-        </h1>
 
-        <Rise delay={700}>
-          <p className="mx-auto mt-9 max-w-lg text-lg leading-relaxed text-[var(--v-fog)]">
-            Identidad, diseño y desarrollo web en un solo equipo. Sin
-            intermediarios, con precio cerrado y una marca que por fin se ve
-            como lo que vale.
-          </p>
-        </Rise>
+          <h1 className="v-display mx-auto mt-9 max-w-[15ch] text-[2.9rem] sm:text-[4.6rem] lg:text-[6rem]">
+            <Words text="Tu marca, armada" />
+            <Rise as="span" delay={520} className="mt-2">
+              <span className="v-grad">capa por capa.</span>
+            </Rise>
+          </h1>
 
-        <Rise delay={820}>
-          <div className="mt-11 flex flex-wrap items-center justify-center gap-4">
-            <Magnetic>
-              <Link href="/contacto" className="v-btn v-btn--solid">
-                Iniciar proyecto
-                <span aria-hidden>→</span>
-              </Link>
-            </Magnetic>
-            <Magnetic strength={0.25}>
-              <Link href="/trabajos" className="v-btn v-btn--ghost">
-                Ver los 18 trabajos
-              </Link>
-            </Magnetic>
-          </div>
-        </Rise>
-      </div>
+          <Rise delay={700}>
+            <p className="mx-auto mt-9 max-w-lg text-lg leading-relaxed text-[var(--v-fog)]">
+              Identidad, diseño y desarrollo web en un solo equipo. Sin
+              intermediarios, con precio cerrado y una marca que por fin se ve
+              como lo que vale.
+            </p>
+          </Rise>
 
-      <div className="pointer-events-none absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-4 sm:flex">
-        <span className="v-cue" />
-        <span className="v-label v-label--xs">Desliza para ver el proceso</span>
+          <Rise delay={820}>
+            <div className="mt-11 flex flex-wrap items-center justify-center gap-4">
+              <Magnetic>
+                <Link href="/contacto" className="v-btn v-btn--solid">
+                  Iniciar proyecto
+                  <span aria-hidden>→</span>
+                </Link>
+              </Magnetic>
+              <Magnetic strength={0.25}>
+                <Link href="/trabajos" className="v-btn v-btn--ghost">
+                  Ver los 18 trabajos
+                </Link>
+              </Magnetic>
+            </div>
+          </Rise>
+        </div>
+
+        <div className="v-portada__cue">
+          <span className="v-cue" />
+          <span className="v-label v-label--xs">Desliza para ver el proceso</span>
+        </div>
       </div>
     </section>
   );

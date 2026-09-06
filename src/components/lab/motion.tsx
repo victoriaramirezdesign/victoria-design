@@ -31,10 +31,46 @@ export function useReducedMotion() {
   return useMediaQuery("(prefers-reduced-motion: reduce)");
 }
 
+/* ------------------------------------------------------------------
+   Senal de "cortina levantada". Los revelados esperan a que termine la
+   entrada; si no, se animarian detras de la cortina y el visitante se
+   perderia la mitad. Lleva red de seguridad por si la intro falla.
+   ------------------------------------------------------------------ */
+
+let listoGlobal = false;
+let reloj: ReturnType<typeof setTimeout> | null = null;
+const oyentes = new Set<() => void>();
+
+export function marcarListo() {
+  if (listoGlobal) return;
+  listoGlobal = true;
+  for (const avisar of oyentes) avisar();
+}
+
+function suscribirListo(alCambiar: () => void) {
+  oyentes.add(alCambiar);
+  if (!listoGlobal && reloj === null) {
+    // Pase lo que pase con la cortina, la pagina termina revelandose.
+    reloj = setTimeout(marcarListo, 2800);
+  }
+  return () => {
+    oyentes.delete(alCambiar);
+  };
+}
+
+export function useListo() {
+  return useSyncExternalStore(
+    suscribirListo,
+    () => listoGlobal,
+    () => false,
+  );
+}
+
 /** Marca `true` la primera vez que el elemento entra al viewport. */
 export function useInView<T extends HTMLElement>(threshold = 0.25) {
   const ref = useRef<T | null>(null);
   const [shown, setShown] = useState(false);
+  const listo = useListo();
 
   useEffect(() => {
     const el = ref.current;
@@ -56,7 +92,9 @@ export function useInView<T extends HTMLElement>(threshold = 0.25) {
     return () => io.disconnect();
   }, [threshold]);
 
-  return { ref, shown };
+  // Aunque el elemento ya este a la vista, no se revela hasta que la
+  // cortina de entrada terminó de subir.
+  return { ref, shown: shown && listo };
 }
 
 /**
