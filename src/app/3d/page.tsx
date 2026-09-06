@@ -7,7 +7,7 @@ import { Secuencia } from "@/components/lab/secuencia";
 import { BarraLogos } from "@/components/lab/barra-logos";
 import { NavLab } from "@/components/lab/nav-lab";
 import { ZonaSuperior } from "@/components/lab/zona-superior";
-import { ShaderField } from "@/components/lab/shader-field";
+import { FondoVideo } from "@/components/lab/fondo-video";
 import {
   BadgeBorrador,
   Cifras,
@@ -51,7 +51,7 @@ export default function Borrador3DPage() {
           se ve como un corte, sino como un mismo plano continuo. */}
       <ZonaSuperior>
         <div className="v-top__fondo" aria-hidden>
-          <ShaderField />
+          <FondoVideo />
         </div>
         <Hero />
         <Secuencia />

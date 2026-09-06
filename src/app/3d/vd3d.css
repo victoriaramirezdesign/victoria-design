@@ -600,6 +600,11 @@
   }
 }
 
+/* Sobre el video, el gris apagado del rotulo desaparece */
+.v-portada__cont .v-label {
+  color: var(--v-fog);
+}
+
 .v-portada__cue {
   position: absolute;
   bottom: 2.25rem;
@@ -614,7 +619,12 @@
 }
 
 @media (min-width: 640px) {
-  .v-portada__cue {
+  /* Sobre el video, el gris apagado del rotulo desaparece */
+.v-portada__cont .v-label {
+  color: var(--v-fog);
+}
+
+.v-portada__cue {
     display: flex;
   }
 }
@@ -1459,117 +1469,6 @@
 }
 
 /* ------------------------------------------------------------------
-   Bloque claro: los planes ("Elige por donde empezar")
-   ------------------------------------------------------------------ */
-
-.v-blanco {
-  position: relative;
-  z-index: 1;
-  background: var(--v-paper);
-  color: var(--v-ink);
-  border-radius: 2.5rem 2.5rem 0 0;
-  padding: 4.5rem 1.25rem 6rem;
-}
-
-@media (min-width: 640px) {
-  .v-blanco {
-    border-radius: 3.5rem 3.5rem 0 0;
-    padding: 7rem 2rem 9rem;
-  }
-}
-
-.v-blanco .v-label {
-  color: rgba(4, 3, 10, 0.45);
-}
-
-.v-plan {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.25rem;
-  padding: 2rem 0;
-  border-top: 1px solid rgba(4, 3, 10, 0.14);
-}
-
-@media (min-width: 640px) {
-  .v-plan {
-    gap: 2.5rem;
-    padding: 2.75rem 0;
-  }
-}
-
-.v-plan:last-child {
-  border-bottom: 1px solid rgba(4, 3, 10, 0.14);
-}
-
-.v-plan__num {
-  flex: none;
-  font-family: var(--font-poppins), system-ui, sans-serif;
-  font-weight: 700;
-  font-size: clamp(2.4rem, 8vw, 6rem);
-  line-height: 0.82;
-  letter-spacing: -0.04em;
-  color: var(--v-ink);
-  opacity: 0.16;
-}
-
-.v-plan__cuerpo {
-  min-width: 0;
-}
-
-.v-plan__nombre {
-  font-family: var(--font-poppins), system-ui, sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  font-size: clamp(1.1rem, 2.4vw, 2rem);
-}
-
-.v-plan__tag {
-  margin-top: 0.5rem;
-  max-width: 42rem;
-  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
-  line-height: 1.6;
-  color: rgba(4, 3, 10, 0.62);
-}
-
-.v-plan__lista {
-  margin-top: 1.1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-}
-
-.v-plan__lista span {
-  border: 1px solid rgba(4, 3, 10, 0.16);
-  border-radius: 999px;
-  padding: 0.3rem 0.75rem;
-  font-size: 0.72rem;
-  color: rgba(4, 3, 10, 0.66);
-}
-
-.v-plan__precio {
-  margin-left: auto;
-  flex: none;
-  align-self: center;
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(4, 3, 10, 0.5);
-  white-space: nowrap;
-}
-
-@media (max-width: 767px) {
-  .v-plan__precio {
-    display: none;
-  }
-}
-
-.v-plan--destacado .v-plan__num {
-  color: var(--v-magenta-deep);
-  opacity: 0.9;
-}
-
-/* ------------------------------------------------------------------
    Fichas de proyecto que se apilan
    ------------------------------------------------------------------ */
 
@@ -1774,29 +1673,289 @@
   opacity: 1;
 }
 
-.v-nav[data-claro="true"]::after {
-  background: rgba(4, 3, 10, 0.12);
+
+/* ------------------------------------------------------------------
+   Fondo de la portada: bucle de video
+   ------------------------------------------------------------------ */
+
+.v-video {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  /* Si el video no carga, esto es lo que se ve: nunca queda un hueco */
+  background:
+    radial-gradient(
+      120% 90% at 50% 105%,
+      rgba(109, 77, 255, 0.35),
+      var(--v-ink-00) 60%
+    ),
+    linear-gradient(180deg, var(--v-ink), var(--v-ink-3));
 }
 
-.v-navveil--claro {
-  background: linear-gradient(
-    to bottom,
-    var(--v-paper) 0%,
-    rgba(251, 250, 255, 0.8) 42%,
-    rgba(251, 250, 255, 0) 100%
+.v-video__mp4 {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Vineta: hunde los bordes para que el titular respire */
+.v-video__vineta {
+  position: absolute;
+  inset: 0;
+  /* Tres paradas: deja respirar el centro de la cinta, oscurece medio
+     campo para que el texto se lea y hunde los bordes. */
+  background: radial-gradient(
+    ellipse 95% 80% at 50% 45%,
+    var(--v-ink-00) 20%,
+    rgba(4, 3, 10, 0.52) 62%,
+    rgba(4, 3, 10, 0.84) 100%
   );
 }
 
-.v-nav[data-claro="true"] {
+/* Empalme con el resto de la pagina */
+.v-video__base {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 38%;
+  background: linear-gradient(to top, var(--v-ink), var(--v-ink-00));
+}
+
+/* ------------------------------------------------------------------
+   Planes: fichas oscuras con aro que sigue al cursor
+   ------------------------------------------------------------------ */
+
+.vd3d {
+  /* Fondos de ficha, en la misma familia de tinta que el resto */
+  --v-ficha-bg: #121019;
+  --v-ficha-bg-alt: #1d1a2a;
+}
+
+.v-planes {
+  position: relative;
+  padding-block: 5rem;
+}
+
+@media (min-width: 640px) {
+  .v-planes {
+    padding-block: 7rem;
+  }
+}
+
+.v-pastilla {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--v-line);
+  background: var(--v-glass-2);
+  font-size: 0.72rem;
+  color: var(--v-fog);
+}
+
+.v-pastilla__punto {
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 999px;
+  background: var(--v-magenta);
+}
+
+.v-planes__titulo {
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4.4vw, 2.6rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* --- Ficha --- */
+.v-ficha {
+  --spot-x: -9999px;
+  --spot-y: -9999px;
+  position: relative;
+  display: flex;
+  border-radius: 1.5rem;
+  border: 1px solid var(--v-line);
+  padding: 0.6rem;
+}
+
+@media (min-width: 640px) {
+  .v-ficha {
+    padding: 0.75rem;
+  }
+}
+
+/* Aro de 1px: degradado radial recortado a solo el borde. El centro del
+   degradado viaja con el puntero; fuera de la ficha se va lejos y se apaga. */
+.v-ficha__aro {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    circle 460px at var(--spot-x) var(--spot-y),
+    rgba(244, 241, 255, 0.5),
+    transparent 60%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.v-ficha__cuerpo {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border-radius: 1.1rem;
+  border: 1px solid var(--v-line);
+  background: var(--v-ficha-bg);
+  padding: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .v-ficha__cuerpo {
+    padding: 2rem;
+  }
+}
+
+.v-ficha[data-destacado="true"] .v-ficha__cuerpo {
+  background: var(--v-ficha-bg-alt);
+}
+
+.v-ficha__insignia {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  border-radius: 999px;
+  border: 1px solid rgba(244, 241, 255, 0.15);
+  background: var(--v-white);
+  color: var(--v-ink);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.v-ficha__rotulo {
+  font-size: 0.69rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--v-fog-dim);
+}
+
+.v-ficha__divisor {
+  display: block;
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--v-line);
+}
+
+.v-ficha__precio {
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-size: 2.75rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+/* Los precios estan pendientes: no se inventa un monto */
+.v-ficha__precio--texto {
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+}
+
+.v-ficha__precio--desde {
+  font-size: 1rem;
+  color: var(--v-fog-dim);
+}
+
+.v-ficha__tag {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--v-fog);
+}
+
+.v-ficha__boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  padding: 0 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--v-line);
+  background: var(--v-glass-2);
+  font-size: 0.85rem;
+  color: var(--v-white);
+  transition:
+    background-color 0.35s var(--v-ease),
+    color 0.35s var(--v-ease);
+}
+
+.v-ficha__boton:hover {
+  background: rgba(244, 241, 255, 0.16);
+}
+
+.v-ficha__boton--fuerte {
+  border-color: transparent;
+  background: rgba(244, 241, 255, 0.82);
   color: var(--v-ink);
 }
 
-.v-nav[data-claro="true"] .v-nav__volver {
-  color: rgba(4, 3, 10, 0.55);
+.v-ficha__boton--fuerte:hover {
+  background: var(--v-white);
 }
 
-.v-nav[data-claro="true"] .v-btn--ghost {
-  color: var(--v-ink);
-  border-color: rgba(4, 3, 10, 0.22);
-  background: rgba(4, 3, 10, 0.04);
+.v-ficha__lista {
+  margin-top: 1.75rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.v-ficha__lista li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: 0.85rem;
+  font-size: 0.85rem;
+  color: rgba(244, 241, 255, 0.85);
+}
+
+.v-ficha__lista li + li {
+  border-top: 1px solid var(--v-line);
+}
+
+.v-ficha__lista li[data-si="false"] {
+  color: rgba(244, 241, 255, 0.4);
+}
+
+.v-ficha__marca {
+  display: flex;
+  flex: none;
+  height: 1.25rem;
+  width: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--v-line-strong);
+  background: rgba(244, 241, 255, 0.06);
+}
+
+.v-ficha__lista li[data-si="false"] .v-ficha__marca {
+  border-color: var(--v-line);
+  background: transparent;
 }

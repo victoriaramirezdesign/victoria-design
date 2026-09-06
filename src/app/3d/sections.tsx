@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { PilaProyectos } from "@/components/lab/pila-proyectos";
+import { FichaPlan } from "@/components/lab/ficha-plan";
 import { TiltCard } from "@/components/lab/tilt-card";
 import { Rail } from "@/components/lab/rail";
 import { Counter, Magnetic, Rise, Words } from "@/components/lab/motion";
@@ -195,55 +196,35 @@ export function Proceso() {
 
 export function Paquetes() {
   return (
-    <section id="paquetes" className="v-blanco scroll-mt-24">
-      <div className="mx-auto max-w-5xl">
-        <p className="v-label">Cómo trabajamos contigo</p>
-        <h2 className="v-display mt-6 text-[2.6rem] leading-[0.95] sm:text-[4.5rem]">
-          Elige por dónde empezar.
-        </h2>
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-[rgba(4,3,10,0.62)] sm:text-lg">
-          Cada proyecto se cotiza cerrado: sabes cuánto cuesta y qué recibes
-          antes de empezar. Sin costos que aparecen a mitad de camino.
-        </p>
-
-        <div className="mt-14 sm:mt-20">
-          {packages.map((plan, i) => (
-            <Rise
-              key={plan.name}
-              delay={i * 110}
-              className={`v-plan ${plan.highlighted ? "v-plan--destacado" : ""}`}
-            >
-              <span className="v-plan__num">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-
-              <div className="v-plan__cuerpo">
-                <h3 className="v-plan__nombre">{plan.name}</h3>
-                <p className="v-plan__tag">{plan.tagline}</p>
-                <div className="v-plan__lista">
-                  {plan.features.map((f) => (
-                    <span key={f}>{f}</span>
-                  ))}
-                </div>
-              </div>
-
-              <span className="v-plan__precio">
-                {plan.price === null ? "Según proyecto" : `Desde S/ ${plan.price}`}
+    <section id="paquetes" className="v-planes scroll-mt-24">
+      <div className="mx-auto max-w-[1080px] px-4 sm:px-6">
+        <div className="mb-14 flex flex-col items-start gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <Rise>
+              <span className="v-pastilla">
+                <span className="v-pastilla__punto" />
+                Planes
               </span>
             </Rise>
-          ))}
+            <Rise delay={100}>
+              <h2 className="v-planes__titulo">
+                Elige por dónde empezar,
+                <br className="hidden sm:block" /> sin costos escondidos.
+              </h2>
+            </Rise>
+          </div>
+          <Rise delay={200}>
+            <p className="max-w-sm text-sm leading-relaxed text-[var(--v-fog)] sm:text-base">
+              Precio cerrado antes de arrancar: sabes cuánto cuesta y qué
+              recibes. Nada aparece a mitad de camino.
+            </p>
+          </Rise>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center gap-4">
-          <Magnetic>
-            <Link href="/contacto" className="v-btn v-btn--solid">
-              Cotizar mi proyecto
-              <span aria-hidden>→</span>
-            </Link>
-          </Magnetic>
-          <span className="text-xs text-[rgba(4,3,10,0.5)]">
-            Respuesta en 24 h hábiles.
-          </span>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {packages.map((plan) => (
+            <FichaPlan key={plan.name} plan={plan} />
+          ))}
         </div>
       </div>
     </section>
@@ -254,7 +235,7 @@ export function Paquetes() {
 
 export function Proyectos() {
   return (
-    <section className="relative z-10 -mt-10 rounded-t-[2.5rem] bg-[var(--v-ink)] pb-8 pt-20 sm:-mt-14 sm:rounded-t-[3.5rem] sm:pt-28">
+    <section className="relative border-t border-[var(--v-line)] pb-8 pt-20 sm:pt-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>

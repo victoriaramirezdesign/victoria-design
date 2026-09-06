@@ -8,6 +8,11 @@ export type Package = {
   /** Precio "desde", en soles. null = cotizacion a medida. */
   price: number | null;
   features: string[];
+  /**
+   * Lo que este plan NO cubre, para la tabla comparativa del borrador 3D.
+   * Sale de lo que si traen los otros planes; el sitio actual lo ignora.
+   */
+  notIncluded?: string[];
   /** Resalta el plan del medio como el recomendado. */
   highlighted?: boolean;
 };
@@ -23,6 +28,11 @@ export const packages: Package[] = [
       "Manual de marca básico",
       "Plantillas para redes",
     ],
+    notIncluded: [
+      "Sitio web y despliegue",
+      "Tienda online y pagos",
+      "Soporte continuo",
+    ],
   },
   {
     name: "Marca + Web",
@@ -36,6 +46,7 @@ export const packages: Package[] = [
       "SEO base y analítica",
       "Dominio y despliegue incluidos",
     ],
+    notIncluded: ["Tienda online y pagos", "Integraciones a medida"],
   },
   {
     name: "A medida",

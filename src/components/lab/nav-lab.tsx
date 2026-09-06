@@ -1,36 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Magnetic } from "@/components/lab/motion";
 import { site } from "@/lib/site";
 
 /**
- * Barra fija del borrador. Se pone en modo claro cuando pasa por encima
- * de una seccion de fondo claro (los planes), si no el texto blanco se
- * volveria invisible.
+ * Barra fija del borrador. El velo y el filo aparecen al despegar del
+ * tope, para que sobre la portada quede limpia.
  */
 export function NavLab() {
   const ref = useRef<HTMLElement | null>(null);
-  const [claro, setClaro] = useState(false);
-
-  useEffect(() => {
-    const claras = document.querySelectorAll(".v-blanco");
-    if (claras.length === 0) return;
-
-    // Solo miramos la franja de arriba, la que ocupa la barra.
-    const alto = ref.current?.offsetHeight ?? 76;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) setClaro(e.isIntersecting);
-      },
-      { rootMargin: `0px 0px -${Math.max(window.innerHeight - alto, 0)}px 0px` },
-    );
-
-    for (const el of claras) io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
   // El filo y el velo aparecen al despegar del tope. Se escribe directo
   // sobre el nodo: no hace falta re-renderizar en cada scroll.
   useEffect(() => {
@@ -47,10 +27,10 @@ export function NavLab() {
   }, []);
 
   return (
-    <header ref={ref} className="v-nav" data-claro={claro}>
+    <header ref={ref} className="v-nav">
       <div
         aria-hidden
-        className={`v-navveil ${claro ? "v-navveil--claro" : ""} pointer-events-none absolute inset-x-0 top-0 h-32`}
+        className="v-navveil pointer-events-none absolute inset-x-0 top-0 h-32"
       />
       <div className="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
         <Link
