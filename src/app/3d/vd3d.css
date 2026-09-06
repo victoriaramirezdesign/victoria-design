@@ -476,3 +476,343 @@
     display: none;
   }
 }
+
+/* ------------------------------------------------------------------
+   Maqueta 3D: un sitio web desarmado en sus capas
+   ------------------------------------------------------------------ */
+
+.vd3d {
+  --v-panel-1: #100c22;
+  --v-panel-2: #070512;
+  /* Hojas intermedias del mazo: semiopacas, para que se lean como papel */
+  --v-sheet-1: rgba(20, 15, 42, 0.72);
+  --v-sheet-2: rgba(9, 6, 22, 0.5);
+}
+
+.v3-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 19rem;
+  perspective: 1400px;
+  perspective-origin: 50% 45%;
+}
+
+@media (min-width: 640px) {
+  .v3-stage {
+    min-height: 32rem;
+    perspective: 1700px;
+  }
+}
+
+.v3-deck {
+  position: relative;
+  width: min(100%, 17rem);
+  aspect-ratio: 4 / 3;
+  transform-style: preserve-3d;
+  transform: translateY(7%) rotateX(var(--rx, 54deg)) rotateZ(var(--rz, -34deg));
+  /* Multiplicador de separacion entre capas: se achica en movil */
+  --zk: 0.6;
+}
+
+@media (min-width: 640px) {
+  .v3-deck {
+    width: min(100%, 28rem);
+    --zk: 1;
+  }
+}
+
+/* Resplandor que hace de sombra proyectada bajo el mazo */
+.v3-shadow {
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1.7;
+  border-radius: 999px;
+  background: radial-gradient(
+    closest-side,
+    var(--v-glow-magenta),
+    var(--v-ink-00) 72%
+  );
+  filter: blur(40px);
+  opacity: 0.5;
+  transform: translateY(22%);
+  pointer-events: none;
+}
+
+/* Cada capa: entra separandose en profundidad al montar */
+.v3-layer {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  opacity: 0;
+  transition:
+    transform 1.2s var(--v-ease),
+    opacity 0.9s var(--v-ease);
+  transition-delay: var(--d, 0ms);
+}
+
+.v3-deck[data-in="true"] .v3-layer {
+  transform: translateZ(var(--z));
+  opacity: 1;
+}
+
+.v3-plate {
+  position: absolute;
+  inset: 0;
+  border-radius: 1.1rem;
+  animation: v3-bob 8s ease-in-out infinite;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes v3-bob {
+  0%,
+  100% {
+    transform: translateZ(0);
+  }
+  50% {
+    transform: translateZ(12px);
+  }
+}
+
+/* --- Capa 1: la reticula del artboard --- */
+.v3-plate--board {
+  border: 1px dashed var(--v-line-strong);
+  background-color: var(--v-sheet-2);
+  background-image:
+    linear-gradient(var(--v-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--v-line) 1px, transparent 1px);
+  background-size: 1.4rem 1.4rem;
+}
+
+.v3-crop {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border: 1px solid var(--v-magenta);
+  opacity: 0.85;
+}
+
+.v3-crop--tl {
+  top: -1px;
+  left: -1px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.v3-crop--tr {
+  top: -1px;
+  right: -1px;
+  border-left: 0;
+  border-bottom: 0;
+}
+.v3-crop--bl {
+  bottom: -1px;
+  left: -1px;
+  border-right: 0;
+  border-top: 0;
+}
+.v3-crop--br {
+  bottom: -1px;
+  right: -1px;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* --- Esqueleto compartido: las tres capas de arriba lo comparten,
+       por eso se leen como el mismo sitio en distintos estados --- */
+.v3-doc {
+  position: absolute;
+  inset: 8%;
+  display: flex;
+  flex-direction: column;
+  gap: 4%;
+}
+
+.v3-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.v3-nav {
+  flex: 0 0 9%;
+}
+
+.v3-hero {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.v3-cards {
+  flex: 0 0 30%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.v3-foot {
+  flex: 0 0 7%;
+}
+
+.v3-mark {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  flex: none;
+}
+
+.v3-link {
+  width: 20px;
+  height: 4px;
+  border-radius: 999px;
+  flex: none;
+}
+
+.v3-cta {
+  margin-left: auto;
+  width: 40px;
+  height: 13px;
+  border-radius: 999px;
+  flex: none;
+}
+
+.v3-bar {
+  display: block;
+  height: 11px;
+  border-radius: 4px;
+}
+
+.v3-bar--xl {
+  width: 80%;
+}
+.v3-bar--lg {
+  width: 58%;
+}
+.v3-bar--sm {
+  width: 34%;
+  height: 6px;
+}
+
+.v3-pill {
+  display: block;
+  width: 58px;
+  height: 17px;
+  border-radius: 999px;
+  margin-top: 5px;
+}
+
+.v3-card {
+  display: block;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.v3-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Capa 2: estructura, todo en linea punteada --- */
+.v3-plate--wire {
+  border: 1px solid var(--v-line-strong);
+  background: linear-gradient(155deg, var(--v-sheet-1), var(--v-sheet-2));
+  box-shadow: 0 18px 40px -26px rgba(0, 0, 0, 0.95);
+}
+
+.v3-plate--wire .v3-mark,
+.v3-plate--wire .v3-link,
+.v3-plate--wire .v3-cta,
+.v3-plate--wire .v3-bar,
+.v3-plate--wire .v3-pill,
+.v3-plate--wire .v3-card {
+  border: 1px dashed var(--v-line-strong);
+  background: transparent;
+}
+
+/* --- Capa 3: la marca entra a pintar --- */
+.v3-plate--brand {
+  border: 1px solid var(--v-line-strong);
+  background: linear-gradient(155deg, var(--v-sheet-1), var(--v-sheet-2));
+  box-shadow: 0 20px 44px -26px rgba(0, 0, 0, 0.95);
+}
+
+.v3-plate--brand .v3-mark {
+  background: var(--v-magenta);
+}
+
+.v3-plate--brand .v3-link {
+  background: var(--v-fog-dim);
+}
+
+.v3-plate--brand .v3-cta,
+.v3-plate--brand .v3-pill {
+  background: linear-gradient(100deg, var(--v-magenta), var(--v-violet));
+}
+
+.v3-plate--brand .v3-bar {
+  background: var(--v-fog);
+}
+
+.v3-plate--brand .v3-bar--sm {
+  background: var(--v-fog-dim);
+}
+
+.v3-plate--brand .v3-card {
+  background: linear-gradient(150deg, var(--v-magenta), var(--v-violet));
+  opacity: 0.5;
+}
+
+/* --- Capa 4: el sitio publicado, con portadas reales de clientes --- */
+.v3-plate--live {
+  border: 1px solid var(--v-line-strong);
+  background: linear-gradient(155deg, var(--v-panel-1), var(--v-panel-2));
+  box-shadow:
+    0 26px 60px -28px rgba(0, 0, 0, 0.95),
+    0 0 0 1px var(--v-line);
+}
+
+.v3-plate--live .v3-mark {
+  background: linear-gradient(120deg, var(--v-magenta), var(--v-violet));
+}
+
+.v3-plate--live .v3-link {
+  background: var(--v-fog-dim);
+}
+
+.v3-plate--live .v3-cta {
+  background: var(--v-white);
+}
+
+.v3-plate--live .v3-bar {
+  background: var(--v-white);
+}
+
+.v3-plate--live .v3-bar--sm {
+  background: var(--v-fog-dim);
+}
+
+.v3-plate--live .v3-pill {
+  background: linear-gradient(100deg, var(--v-magenta), var(--v-violet));
+}
+
+.v3-plate--live .v3-card {
+  background: var(--v-ink-2);
+}
+
+/* Sin movimiento: el mazo se muestra armado y quieto */
+@media (prefers-reduced-motion: reduce) {
+  .v3-layer {
+    opacity: 1;
+    transform: translateZ(var(--z));
+  }
+
+  .v3-plate {
+    animation: none;
+  }
+}

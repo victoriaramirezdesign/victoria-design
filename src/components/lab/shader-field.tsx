@@ -3,13 +3,14 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Objeto 3D raymarcheado en WebGL crudo (sin librerias externas).
- * Un toro retorcido con superficie iridiscente que gira, respira y
- * reacciona al puntero.
+ * Fondo del hero en WebGL crudo (sin librerias externas): una mesa de
+ * trabajo infinita en perspectiva que avanza hacia el horizonte, con la
+ * reticula del artboard, el resplandor iridiscente de la marca y polvo
+ * suspendido. Es atmosfera: el protagonista es la maqueta 3D de encima.
  *
- * Es defensivo a proposito: si el navegador no da contexto WebGL o algo
- * falla al compilar, el canvas se queda transparente y detras se ve el
- * degradado CSS. Nunca rompe la pagina.
+ * Defensivo a proposito: si no hay contexto WebGL o algo falla al
+ * compilar, el canvas queda transparente y detras se ve el degradado
+ * CSS. Nunca rompe la pagina.
  */
 
 const VERT = `
@@ -27,34 +28,10 @@ uniform float uTime;
 uniform vec2  uMouse;
 uniform float uFade;
 
-mat2 rot(float a) {
-  float c = cos(a), s = sin(a);
-  return mat2(c, -s, s, c);
-}
-
-float sdTorus(vec3 p, vec2 t) {
-  vec2 q = vec2(length(p.xz) - t.x, p.y);
-  return length(q) - t.y;
-}
-
-float map(vec3 p) {
-  vec3 q = p;
-  q.xz *= rot(uTime * 0.20);
-  q.xy *= rot(uTime * 0.13 + uMouse.x * 0.55);
-  q.yz *= rot(-uMouse.y * 0.45);
-  q.xz *= rot(q.y * (0.85 + 0.40 * sin(uTime * 0.35)));
-  float d = sdTorus(q, vec2(1.15, 0.36));
-  d -= 0.042 * sin(8.0 * q.x + uTime * 1.7) * sin(8.0 * q.z + uTime * 1.2);
-  return d;
-}
-
-vec3 calcNormal(vec3 p) {
-  vec2 e = vec2(0.0018, 0.0);
-  return normalize(vec3(
-    map(p + e.xyy) - map(p - e.xyy),
-    map(p + e.yxy) - map(p - e.yxy),
-    map(p + e.yyx) - map(p - e.yyx)
-  ));
+float hash21(vec2 p) {
+  p = fract(p * vec2(123.34, 456.21));
+  p += dot(p, p + 45.32);
+  return fract(p.x * p.y);
 }
 
 vec3 pal(float t) {
@@ -63,79 +40,75 @@ vec3 pal(float t) {
 
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;
-  float aspect = uRes.x / uRes.y;
 
-  // En pantallas anchas el objeto se corre a la derecha para dejarle
-  // sitio al titular; en vertical se queda centrado.
-  vec2 sv = uv;
-  sv.x -= mix(0.0, 0.36, step(1.15, aspect));
-
-  // Camara lejos + focal corta: el toro entra entero con aire alrededor.
-  // Alto visible a la altura del objeto = z * 0.5 / focal ~= 2.2 unidades,
-  // contra un radio exterior de ~1.5. Queda ocupando dos tercios.
-  vec3 ro = vec3(0.0, 0.0, 7.0);
-  vec3 rd = normalize(vec3(sv, -1.6));
-
-  float t = 0.0;
-  float glow = 0.0;
-  float hit = 0.0;
-  vec3 p = ro;
-
-  for (int i = 0; i < 76; i++) {
-    p = ro + rd * t;
-    float d = map(p);
-    glow += 0.013 / (0.055 + abs(d) * 8.5);
-    if (d < 0.0018) { hit = 1.0; break; }
-    if (t > 13.0) break;
-    t += d * 0.62;
-  }
-
-  // Fondo: tinta profunda con un tinte que respira
+  // Cielo: tinta profunda que aclara un poco hacia arriba
   vec3 col = mix(
-    vec3(0.014, 0.011, 0.036),
-    vec3(0.045, 0.031, 0.090),
-    clamp(uv.y * 0.6 + 0.55, 0.0, 1.0)
+    vec3(0.012, 0.010, 0.030),
+    vec3(0.038, 0.026, 0.078),
+    clamp(uv.y * 0.85 + 0.5, 0.0, 1.0)
   );
-  col += pal(uTime * 0.03 + 0.15) * 0.045 * (1.0 - clamp(length(uv) * 0.7, 0.0, 1.0));
 
-  if (hit > 0.5) {
-    vec3 n = calcNormal(p);
-    vec3 v = -rd;
-    float fres = pow(1.0 - clamp(dot(n, v), 0.0, 1.0), 2.6);
+  // La linea del horizonte va por debajo del centro y respira con el mouse
+  float horizon = -0.26 + uMouse.y * 0.016;
 
-    vec3 l1 = normalize(vec3(0.80, 0.90, 0.60));
-    vec3 l2 = normalize(vec3(-0.70, -0.30, 0.50));
-    float dif  = clamp(dot(n, l1), 0.0, 1.0);
-    float dif2 = clamp(dot(n, l2), 0.0, 1.0);
+  // Resplandor de marca sobre el horizonte: magenta que vira a violeta
+  float hd = abs(uv.y - horizon);
+  vec3 brillo = mix(
+    vec3(0.82, 0.30, 0.66),
+    vec3(0.40, 0.30, 1.00),
+    0.5 + 0.5 * sin(uTime * 0.22 + uv.x * 1.1)
+  );
+  col += brillo * exp(-hd * 11.0) * 0.22;
+  col += brillo * exp(-hd * 2.6)  * 0.040;
 
-    vec3 irid = pal(fres * 0.9 + n.y * 0.18 + uTime * 0.05);
-    irid = mix(irid, vec3(0.82, 0.30, 0.66), 0.35);
+  // Mesa de trabajo: plano en perspectiva bajo el horizonte
+  if (uv.y < horizon) {
+    float prof = horizon - uv.y;
+    // Proyeccion: cerca del horizonte, muy lejos
+    float z = 0.62 / max(prof, 1e-3);
+    float x = uv.x * z;
 
-    vec3 surf = vec3(0.020, 0.014, 0.048);
-    surf += irid * (0.25 + 0.75 * fres);
-    surf += vec3(0.85, 0.30, 0.66) * dif * 0.38;
-    surf += vec3(0.21, 0.30, 1.00) * dif2 * 0.30;
+    vec2 g = vec2(x + uMouse.x * 0.7, z - uTime * 0.85);
 
-    float spec = pow(clamp(dot(reflect(-l1, n), v), 0.0, 1.0), 44.0);
-    surf += vec3(1.0) * spec * 0.55;
+    // El grosor de linea crece con la cercania, hace de antialias barato
+    vec2 f = abs(fract(g) - 0.5);
+    float wx = 0.020 + prof * 0.40;
+    float wz = 0.020 + prof * 0.95;
+    float linea = max(
+      1.0 - smoothstep(0.0, wx, f.x),
+      1.0 - smoothstep(0.0, wz, f.y)
+    );
 
-    col = surf;
+    // Niebla: se disuelve al acercarse al horizonte y con la distancia
+    float velo = smoothstep(0.0, 0.05, prof) * exp(-z * 0.13);
+
+    col += pal(0.08 + z * 0.006 + uTime * 0.02) * linea * velo * 0.20;
+    col += vec3(0.82, 0.30, 0.66) * linea * velo * 0.07;
+
+    // Reflejo tenue del resplandor sobre la mesa
+    col += brillo * exp(-prof * 8.0) * 0.045;
   }
 
-  // Halo volumetrico acumulado a lo largo del rayo
-  col += pal(uTime * 0.04 + 0.55) * glow * 0.075;
-  col += vec3(0.82, 0.30, 0.66) * glow * 0.030;
+  // Polvo suspendido sobre el horizonte
+  vec2 sp = uv * 9.0;
+  float h = hash21(floor(sp));
+  if (uv.y > horizon && h > 0.975) {
+    vec2 c = fract(sp) - 0.5;
+    float parpadeo = 0.55 + 0.45 * sin(uTime * 1.3 + h * 40.0);
+    col += vec3(0.90, 0.86, 1.00) *
+           smoothstep(0.15, 0.0, length(c)) * parpadeo * 0.22;
+  }
 
   // Vineta
-  col *= 1.0 - 0.34 * pow(clamp(length(uv * vec2(0.85, 1.0)), 0.0, 1.4), 2.2);
+  col *= 1.0 - 0.40 * pow(clamp(length(uv * vec2(0.80, 1.05)), 0.0, 1.4), 2.0);
 
   // Tonemap filmico (ACES aproximado) para que no se queme el magenta
-  col *= 1.22;
+  col *= 1.15;
   col = (col * (2.51 * col + 0.03)) / (col * (2.43 * col + 0.59) + 0.14);
 
   // Grano fino, mata el banding del degradado
-  float g = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
-  col += (g - 0.5) * 0.018;
+  float gr = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
+  col += (gr - 0.5) * 0.020;
 
   gl_FragColor = vec4(clamp(col, 0.0, 1.0) * uFade, 1.0);
 }
@@ -216,7 +189,6 @@ export function ShaderField({ className = "" }: { className?: string }) {
 
       const resize = () => {
         if (!gl) return;
-        // Techo de DPR: el raymarching es caro, no vale la pena a 3x.
         const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         const w = Math.max(1, Math.floor(canvas.clientWidth * dpr));
         const h = Math.max(1, Math.floor(canvas.clientHeight * dpr));
@@ -248,7 +220,7 @@ export function ShaderField({ className = "" }: { className?: string }) {
         // una pestana a medio gas tambien termina de entrar.
         fade = Math.min(elapsed / 900, 1);
 
-        const t = reduced ? 12 : elapsed / 1000;
+        const t = reduced ? 8 : elapsed / 1000;
 
         gl.uniform2f(uRes, canvas.width, canvas.height);
         gl.uniform1f(uTime, t);

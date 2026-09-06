@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { ShaderField } from "@/components/lab/shader-field";
+import { WebStack, WebStackLeyenda } from "@/components/lab/web-stack";
 import { TiltCard } from "@/components/lab/tilt-card";
 import { Rail } from "@/components/lab/rail";
 import { Counter, Magnetic, Rise, Words } from "@/components/lab/motion";
@@ -54,60 +55,63 @@ export function Hero() {
       <div className="absolute inset-0 -z-10">
         <ShaderField />
       </div>
-      <div className="v-grid pointer-events-none absolute inset-0 -z-10 opacity-40" />
       {/* Velo que oscurece el lado del titular para que el texto respire */}
       <div className="v-scrim pointer-events-none absolute inset-0 -z-10" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-64 bg-gradient-to-t from-[var(--v-ink)] to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-t from-[var(--v-ink)] to-transparent" />
 
-      <div className="mx-auto w-full max-w-7xl px-5 pb-28 pt-36 sm:px-8">
-        <Rise>
-          <p className="v-label flex items-center gap-4">
-            <span className="inline-block h-px w-10 bg-[var(--v-magenta)]" />
-            Estudio creativo · Nuevo Chimbote, Perú
-          </p>
-        </Rise>
-
-        <h1 className="v-display mt-10 max-w-[15ch] text-[2.9rem] sm:text-[4.6rem] lg:text-[6rem]">
-          <Words text="Marcas que se sienten" />
-          <Rise as="span" delay={520} className="mt-2">
-            <span className="v-grad">en otra dimensión.</span>
+      <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 pb-20 pt-28 sm:gap-12 sm:px-8 sm:pb-24 sm:pt-32 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-8 lg:pb-28 lg:pt-36">
+        <div>
+          <Rise>
+            <p className="v-label flex items-center gap-4">
+              <span className="inline-block h-px w-10 bg-[var(--v-magenta)]" />
+              Estudio creativo · Nuevo Chimbote, Perú
+            </p>
           </Rise>
-        </h1>
 
-        <Rise delay={700}>
-          <p className="mt-10 max-w-xl text-lg leading-relaxed text-[var(--v-fog)]">
-            Identidad, diseño y desarrollo web en un solo equipo. Sin
-            intermediarios, con precio cerrado y una marca que por fin se ve
-            como lo que vale.
-          </p>
-        </Rise>
+          <h1 className="v-display mt-7 max-w-[14ch] sm:mt-9 text-[2.8rem] sm:text-[4.4rem] lg:text-[5.4rem]">
+            <Words text="Tu marca, armada" />
+            <Rise as="span" delay={520} className="mt-2">
+              <span className="v-grad">capa por capa.</span>
+            </Rise>
+          </h1>
 
-        <Rise delay={820}>
-          <div className="mt-12 flex flex-wrap items-center gap-4">
-            <Magnetic>
-              <Link href="/contacto" className="v-btn v-btn--solid">
-                Iniciar proyecto
-                <span aria-hidden>→</span>
-              </Link>
-            </Magnetic>
-            <Magnetic strength={0.25}>
-              <Link href="/trabajos" className="v-btn v-btn--ghost">
-                Ver los 18 trabajos
-              </Link>
-            </Magnetic>
-          </div>
-        </Rise>
+          <Rise delay={700}>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-[var(--v-fog)] sm:mt-8">
+              Identidad, diseño y desarrollo web en un solo equipo. Sin
+              intermediarios, con precio cerrado y una marca que por fin se ve
+              como lo que vale.
+            </p>
+          </Rise>
+
+          <Rise delay={820}>
+            <div className="mt-8 flex flex-wrap items-center gap-4 sm:mt-11">
+              <Magnetic>
+                <Link href="/contacto" className="v-btn v-btn--solid">
+                  Iniciar proyecto
+                  <span aria-hidden>→</span>
+                </Link>
+              </Magnetic>
+              <Magnetic strength={0.25}>
+                <Link href="/trabajos" className="v-btn v-btn--ghost">
+                  Ver los 18 trabajos
+                </Link>
+              </Magnetic>
+            </div>
+          </Rise>
+        </div>
+
+        {/* La maqueta 3D: lo que hacemos, no un adorno abstracto */}
+        <div className="flex flex-col items-center gap-6 sm:gap-8">
+          <WebStack />
+          <Rise delay={1100}>
+            <WebStackLeyenda />
+          </Rise>
+        </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-4 sm:flex">
+      <div className="pointer-events-none absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-4 sm:flex">
         <span className="v-cue" />
         <span className="v-label v-label--xs">Desliza</span>
-      </div>
-
-      <div className="pointer-events-none absolute right-8 top-1/2 hidden -translate-y-1/2 lg:block">
-        <span className="v-label [writing-mode:vertical-rl]">
-          Desde 2017 · 18 marcas
-        </span>
       </div>
     </section>
   );
