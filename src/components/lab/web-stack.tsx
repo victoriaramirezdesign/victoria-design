@@ -155,19 +155,3 @@ export function WebStack() {
     </div>
   );
 }
-
-/** Pie de la maqueta: nombra las capas para quien no las lea de un vistazo. */
-export function WebStackLeyenda() {
-  return (
-    <p className="v-label v-label--xs v-label--soft flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-      {CAPAS.map((c, i) => (
-        <span key={c.variante} className="flex items-center gap-3">
-          {c.nombre}
-          {i < CAPAS.length - 1 ? (
-            <span className="text-[var(--v-magenta)]">→</span>
-          ) : null}
-        </span>
-      ))}
-    </p>
-  );
-}

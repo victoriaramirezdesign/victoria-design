@@ -3,23 +3,26 @@ import "./vd3d.css";
 
 import { Cursor } from "@/components/lab/cursor";
 import { Intro } from "@/components/lab/intro";
+import { Secuencia } from "@/components/lab/secuencia";
+import { BarraLogos } from "@/components/lab/barra-logos";
+import { NavLab } from "@/components/lab/nav-lab";
 import {
   BadgeBorrador,
   Cifras,
   Cta,
   Hero,
   Manifiesto,
-  Nav,
+  Paquetes,
   Pie,
   Proceso,
+  Proyectos,
   Servicios,
-  Trabajos,
 } from "./sections";
 
 export const metadata: Metadata = {
   title: "Borrador 3D",
   description:
-    "Concepto de sitio 3D para Victoria Design: movimiento, profundidad y la misma oferta de servicios.",
+    "Concepto de sitio 3D para Victoria Design: de la hoja en blanco al sitio publicado, con la misma oferta de servicios.",
   // Es un borrador interno: no queremos que compita en buscadores con el
   // sitio real ni que se indexe a medio cocinar.
   robots: { index: false, follow: false },
@@ -40,12 +43,15 @@ export default function Borrador3DPage() {
       <Cursor />
       <span className="v-grain" aria-hidden />
 
-      <Nav />
+      <NavLab />
       <Hero />
+      <Secuencia />
       <Manifiesto />
       <Servicios />
+      <BarraLogos />
       <Proceso />
-      <Trabajos />
+      <Paquetes />
+      <Proyectos />
       <Cifras />
       <Cta />
       <Pie />

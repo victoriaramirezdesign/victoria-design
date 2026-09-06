@@ -1,117 +1,68 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { ShaderField } from "@/components/lab/shader-field";
-import { WebStack, WebStackLeyenda } from "@/components/lab/web-stack";
+import { PilaProyectos } from "@/components/lab/pila-proyectos";
 import { TiltCard } from "@/components/lab/tilt-card";
 import { Rail } from "@/components/lab/rail";
 import { Counter, Magnetic, Rise, Words } from "@/components/lab/motion";
 import { services } from "@/content/services";
 import { processSteps } from "@/content/process";
-import { projects } from "@/content/projects";
+import { packages } from "@/content/packages";
 import { site, whatsappLink } from "@/lib/site";
-
-const vitrina = projects.slice(0, 6);
-
-/* ------------------------------------------------------------------ */
-
-export function Nav() {
-  return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <div
-        aria-hidden
-        className="v-navveil pointer-events-none absolute inset-x-0 top-0 h-32"
-      />
-      <div className="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
-        <Link
-          href="/3d"
-          className="font-wordmark text-sm uppercase tracking-[0.28em] transition-opacity hover:opacity-70"
-        >
-          {site.name}
-        </Link>
-
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="hidden text-xs text-[var(--v-fog)] transition-colors hover:text-[var(--v-white)] sm:block"
-          >
-            Volver al sitio actual
-          </Link>
-          <Magnetic strength={0.25}>
-            <Link href="/contacto" className="v-btn v-btn--ghost v-btn--sm">
-              Conversemos
-            </Link>
-          </Magnetic>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col justify-center overflow-hidden">
+    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden text-center">
       <div className="absolute inset-0 -z-10">
         <ShaderField />
       </div>
-      {/* Velo que oscurece el lado del titular para que el texto respire */}
-      <div className="v-scrim pointer-events-none absolute inset-0 -z-10" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-t from-[var(--v-ink)] to-transparent" />
 
-      <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 pb-20 pt-28 sm:gap-12 sm:px-8 sm:pb-24 sm:pt-32 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-8 lg:pb-28 lg:pt-36">
-        <div>
-          <Rise>
-            <p className="v-label flex items-center gap-4">
-              <span className="inline-block h-px w-10 bg-[var(--v-magenta)]" />
-              Estudio creativo · Nuevo Chimbote, Perú
-            </p>
-          </Rise>
+      <div className="mx-auto w-full max-w-4xl px-5 pb-28 pt-32 sm:px-8">
+        <Rise>
+          <p className="v-label flex items-center justify-center gap-4">
+            <span className="inline-block h-px w-10 bg-[var(--v-magenta)]" />
+            Estudio creativo · Nuevo Chimbote, Perú
+          </p>
+        </Rise>
 
-          <h1 className="v-display mt-7 max-w-[14ch] sm:mt-9 text-[2.8rem] sm:text-[4.4rem] lg:text-[5.4rem]">
-            <Words text="Tu marca, armada" />
-            <Rise as="span" delay={520} className="mt-2">
-              <span className="v-grad">capa por capa.</span>
-            </Rise>
-          </h1>
-
-          <Rise delay={700}>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-[var(--v-fog)] sm:mt-8">
-              Identidad, diseño y desarrollo web en un solo equipo. Sin
-              intermediarios, con precio cerrado y una marca que por fin se ve
-              como lo que vale.
-            </p>
+        <h1 className="v-display mx-auto mt-9 max-w-[15ch] text-[2.9rem] sm:text-[4.6rem] lg:text-[6rem]">
+          <Words text="Tu marca, armada" />
+          <Rise as="span" delay={520} className="mt-2">
+            <span className="v-grad">capa por capa.</span>
           </Rise>
+        </h1>
 
-          <Rise delay={820}>
-            <div className="mt-8 flex flex-wrap items-center gap-4 sm:mt-11">
-              <Magnetic>
-                <Link href="/contacto" className="v-btn v-btn--solid">
-                  Iniciar proyecto
-                  <span aria-hidden>→</span>
-                </Link>
-              </Magnetic>
-              <Magnetic strength={0.25}>
-                <Link href="/trabajos" className="v-btn v-btn--ghost">
-                  Ver los 18 trabajos
-                </Link>
-              </Magnetic>
-            </div>
-          </Rise>
-        </div>
+        <Rise delay={700}>
+          <p className="mx-auto mt-9 max-w-lg text-lg leading-relaxed text-[var(--v-fog)]">
+            Identidad, diseño y desarrollo web en un solo equipo. Sin
+            intermediarios, con precio cerrado y una marca que por fin se ve
+            como lo que vale.
+          </p>
+        </Rise>
 
-        {/* La maqueta 3D: lo que hacemos, no un adorno abstracto */}
-        <div className="flex flex-col items-center gap-6 sm:gap-8">
-          <WebStack />
-          <Rise delay={1100}>
-            <WebStackLeyenda />
-          </Rise>
-        </div>
+        <Rise delay={820}>
+          <div className="mt-11 flex flex-wrap items-center justify-center gap-4">
+            <Magnetic>
+              <Link href="/contacto" className="v-btn v-btn--solid">
+                Iniciar proyecto
+                <span aria-hidden>→</span>
+              </Link>
+            </Magnetic>
+            <Magnetic strength={0.25}>
+              <Link href="/trabajos" className="v-btn v-btn--ghost">
+                Ver los 18 trabajos
+              </Link>
+            </Magnetic>
+          </div>
+        </Rise>
       </div>
 
       <div className="pointer-events-none absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-4 sm:flex">
         <span className="v-cue" />
-        <span className="v-label v-label--xs">Desliza</span>
+        <span className="v-label v-label--xs">Desliza para ver el proceso</span>
       </div>
     </section>
   );
@@ -246,14 +197,73 @@ export function Proceso() {
 
 /* ------------------------------------------------------------------ */
 
-export function Trabajos() {
+export function Paquetes() {
   return (
-    <section className="relative py-24 sm:py-32">
+    <section id="paquetes" className="v-blanco scroll-mt-24">
+      <div className="mx-auto max-w-5xl">
+        <p className="v-label">Cómo trabajamos contigo</p>
+        <h2 className="v-display mt-6 text-[2.6rem] leading-[0.95] sm:text-[4.5rem]">
+          Elige por dónde empezar.
+        </h2>
+        <p className="mt-6 max-w-xl text-base leading-relaxed text-[rgba(4,3,10,0.62)] sm:text-lg">
+          Cada proyecto se cotiza cerrado: sabes cuánto cuesta y qué recibes
+          antes de empezar. Sin costos que aparecen a mitad de camino.
+        </p>
+
+        <div className="mt-14 sm:mt-20">
+          {packages.map((plan, i) => (
+            <Rise
+              key={plan.name}
+              delay={i * 110}
+              className={`v-plan ${plan.highlighted ? "v-plan--destacado" : ""}`}
+            >
+              <span className="v-plan__num">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+
+              <div className="v-plan__cuerpo">
+                <h3 className="v-plan__nombre">{plan.name}</h3>
+                <p className="v-plan__tag">{plan.tagline}</p>
+                <div className="v-plan__lista">
+                  {plan.features.map((f) => (
+                    <span key={f}>{f}</span>
+                  ))}
+                </div>
+              </div>
+
+              <span className="v-plan__precio">
+                {plan.price === null ? "Según proyecto" : `Desde S/ ${plan.price}`}
+              </span>
+            </Rise>
+          ))}
+        </div>
+
+        <div className="mt-12 flex flex-wrap items-center gap-4">
+          <Magnetic>
+            <Link href="/contacto" className="v-btn v-btn--solid">
+              Cotizar mi proyecto
+              <span aria-hidden>→</span>
+            </Link>
+          </Magnetic>
+          <span className="text-xs text-[rgba(4,3,10,0.5)]">
+            Respuesta en 24 h hábiles.
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+
+export function Proyectos() {
+  return (
+    <section className="relative z-10 -mt-10 rounded-t-[2.5rem] bg-[var(--v-ink)] pb-8 pt-20 sm:-mt-14 sm:rounded-t-[3.5rem] sm:pt-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="v-label">Proyectos culminados</p>
-            <h2 className="v-display mt-6 text-4xl sm:text-6xl">
+            <h2 className="v-display mt-6 max-w-3xl text-4xl sm:text-6xl">
               <Words text="18 marcas que decidieron verse en serio." />
             </h2>
           </div>
@@ -267,36 +277,8 @@ export function Trabajos() {
           </Magnetic>
         </div>
 
-        <div className="v-stage mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {vitrina.map((project, i) => (
-            <Rise key={project.slug} delay={(i % 3) * 110}>
-              <Link
-                href={`/trabajos/${project.slug}`}
-                className="group block"
-                aria-label={`Ver ${project.title}`}
-              >
-                <TiltCard className="v-glass p-3" max={10}>
-                  <div className="overflow-hidden rounded-[1.25rem]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={project.cover}
-                      alt={`Logotipo de ${project.title}`}
-                      loading="lazy"
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between gap-4 px-3 pb-2 pt-5">
-                    <h3 className="font-display text-base transition-colors group-hover:text-[var(--v-magenta)]">
-                      {project.title}
-                    </h3>
-                    <span className="v-mono text-[0.65rem] text-[var(--v-fog-dim)]">
-                      {project.year ?? "—"}
-                    </span>
-                  </div>
-                </TiltCard>
-              </Link>
-            </Rise>
-          ))}
+        <div className="mt-14">
+          <PilaProyectos />
         </div>
       </div>
     </section>
