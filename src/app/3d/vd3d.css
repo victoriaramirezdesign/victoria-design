@@ -606,12 +606,7 @@
 }
 
 @media (min-width: 640px) {
-  /* Sobre el video, el gris apagado del rotulo desaparece */
-.v-portada__cont .v-label {
-  color: var(--v-fog);
-}
-
-.v-portada__cue {
+  .v-portada__cue {
     display: flex;
   }
 }
@@ -990,92 +985,8 @@
   --v-tk-st: #c3e88d;
 }
 
-.v-seq {
-  position: relative;
-  z-index: 1;
-}
-
-.v-seq__fijo {
-  position: sticky;
-  top: 0;
-  display: flex;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.v-seq__grid {
-  display: grid;
-  gap: 3rem;
-  width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 7rem 1.25rem 4rem;
-}
-
-@media (min-width: 640px) {
-  .v-seq__grid {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .v-seq__grid {
-    grid-template-columns: 1fr 1.05fr;
-    align-items: center;
-    gap: 4rem;
-    padding-top: 5rem;
-    padding-bottom: 3rem;
-  }
-}
-
-.v-seq__barra {
-  margin-top: 2rem;
-  height: 2px;
-  width: 100%;
-  max-width: 24rem;
-  background: var(--v-line);
-  overflow: hidden;
-}
-
-.v-seq__barra > span {
-  display: block;
-  height: 100%;
-  transform-origin: left;
-  transform: scaleX(0);
-  background: linear-gradient(90deg, var(--v-magenta), var(--v-violet));
-}
-
 /* --- Escenario: las seis escenas comparten el mismo hueco --- */
-.v-seq__escenario {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  perspective: 1500px;
-}
-
-.v-seq__escena {
-  --o: 0;
-  --lp: 0;
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  opacity: var(--o);
-  transform: scale(calc(0.93 + var(--o) * 0.07));
-  transform-style: preserve-3d;
-  will-change: opacity, transform;
-}
-
 /* Antes de que corra el JS, la primera escena ya se ve */
-.v-seq__escena:first-child {
-  --o: 1;
-}
-
-.v-seq__rotulo {
-  display: none;
-}
-
 /* --- Marco comun de las escenas --- */
 .esc {
   position: relative;
@@ -1334,54 +1245,6 @@
 }
 
 /* --- Sin anclaje (movil / sin movimiento): escenas apiladas --- */
-@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
-  .v-seq {
-    height: auto !important;
-  }
-
-  .v-seq__fijo {
-    position: static;
-    min-height: 0;
-  }
-
-  .v-seq__escenario {
-    position: static;
-    aspect-ratio: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 3.5rem;
-    perspective: none;
-  }
-
-  /* La camara solo tiene sentido con el escenario anclado.
-     Va con el padre delante para ganarle a la regla base, que se declara
-     mas abajo en el archivo. */
-  .v-seq__escenario .v-seq__camara {
-    position: static;
-    display: contents;
-    transform: none;
-  }
-
-  .v-seq__aura {
-    display: none;
-  }
-
-  .v-seq__escena {
-    position: static;
-    opacity: 1;
-    transform: none;
-    display: block;
-  }
-
-  .v-seq__rotulo {
-    display: block;
-    margin-bottom: 0.9rem;
-  }
-
-  .v-seq__barra {
-    display: none;
-  }
-}
 
 /* ------------------------------------------------------------------
    Barra de movimiento con los logos de clientes
@@ -1936,170 +1799,12 @@
   background: transparent;
 }
 
-/* ------------------------------------------------------------------
-   Secuencia: profundidad, camara y pasos
-   ------------------------------------------------------------------ */
-
 /* Aura que cambia de color con la escena activa */
-.v-seq__aura {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 120%;
-  aspect-ratio: 1.5;
-  transform: translate(-50%, -50%);
-  border-radius: 999px;
-  filter: blur(70px);
-  opacity: 0.5;
-  pointer-events: none;
-  background: radial-gradient(
-    closest-side,
-    var(--v-aura, var(--v-glow-magenta)),
-    var(--v-ink-00) 72%
-  );
-  transition: background 1.1s var(--v-ease);
-}
-
-.v-seq__escenario[data-escena="0"] {
-  --v-aura: rgba(244, 241, 255, 0.22);
-}
-.v-seq__escenario[data-escena="1"] {
-  --v-aura: var(--v-glow-magenta);
-}
-.v-seq__escenario[data-escena="2"] {
-  --v-aura: var(--v-glow-violet);
-}
-.v-seq__escenario[data-escena="3"] {
-  --v-aura: var(--v-glow-cyan);
-}
-.v-seq__escenario[data-escena="4"] {
-  --v-aura: var(--v-glow-violet);
-}
-.v-seq__escenario[data-escena="5"] {
-  --v-aura: var(--v-glow-magenta);
-}
-
 /* La camara inclina el juego entero segun el puntero */
-.v-seq__camara {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  transform: rotateY(var(--camx, 0deg)) rotateX(var(--camy, 0deg));
-  transition: transform 0.9s var(--v-ease);
-}
-
 /* Las escenas ya no se cruzan de plano: entran desde el fondo girando */
-.v-seq__escena {
-  transform: translateZ(calc(var(--dz, 0) * 1px))
-    rotateY(calc(var(--dd, 0) * -20deg))
-    translateX(calc(var(--dd, 0) * -7%))
-    scale(calc(0.92 + var(--o) * 0.08));
-}
-
 /* --- Los seis pasos, siempre a la vista --- */
-.v-seq__pasos {
-  position: relative;
-  margin-top: 2.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
 /* Riel que une los pasos */
-.v-seq__pasos::before {
-  content: "";
-  position: absolute;
-  left: 0.3rem;
-  top: 0.9rem;
-  bottom: 0.9rem;
-  width: 1px;
-  background: var(--v-line);
-}
-
-.v-seq__pasos li {
-  position: relative;
-  display: flex;
-  gap: 1.1rem;
-  padding-block: 0.55rem;
-}
-
-.v-seq__marca {
-  position: relative;
-  z-index: 1;
-  margin-top: 0.45rem;
-  flex: none;
-  width: 0.62rem;
-  height: 0.62rem;
-  border-radius: 999px;
-  border: 1px solid var(--v-line-strong);
-  background: var(--v-ink);
-  transition:
-    background-color 0.5s var(--v-ease),
-    border-color 0.5s var(--v-ease),
-    box-shadow 0.5s var(--v-ease);
-}
-
-.v-seq__pasos li[data-visto="true"] .v-seq__marca {
-  background: var(--v-fog-dim);
-  border-color: var(--v-fog-dim);
-}
-
-.v-seq__pasos li[data-activo="true"] .v-seq__marca {
-  background: var(--v-magenta);
-  border-color: var(--v-magenta);
-  box-shadow: 0 0 0 4px rgba(210, 77, 168, 0.18);
-}
-
-.v-seq__paso {
-  min-width: 0;
-}
-
-.v-seq__nombre {
-  display: flex;
-  align-items: baseline;
-  gap: 0.7rem;
-  font-family: var(--font-poppins), system-ui, sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
-  letter-spacing: -0.01em;
-  color: rgba(169, 163, 196, 0.72);
-  transition: color 0.5s var(--v-ease);
-}
-
-.v-seq__nombre i {
-  font-style: normal;
-  font-size: 0.66rem;
-  color: var(--v-fog-dim);
-  transition: color 0.5s var(--v-ease);
-}
-
-.v-seq__pasos li[data-activo="true"] .v-seq__nombre {
-  color: var(--v-white);
-}
-
-.v-seq__pasos li[data-activo="true"] .v-seq__nombre i {
-  color: var(--v-magenta);
-}
-
 /* El texto solo se abre en el paso activo */
-.v-seq__desc {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: var(--v-fog);
-  transition:
-    max-height 0.7s var(--v-ease),
-    opacity 0.5s var(--v-ease),
-    margin-top 0.7s var(--v-ease);
-}
-
-.v-seq__pasos li[data-activo="true"] .v-seq__desc {
-  max-height: 9rem;
-  opacity: 1;
-  margin-top: 0.5rem;
-}
-
 /* ------------------------------------------------------------------
    Cierre: el paisaje toma la pagina en el ultimo tramo
    ------------------------------------------------------------------ */
@@ -2219,4 +1924,354 @@
   color: var(--v-ink);
   border-color: rgba(4, 3, 10, 0.22);
   background: rgba(4, 3, 10, 0.04);
+}
+
+/* ------------------------------------------------------------------
+   El proceso, en vivo: viaje en profundidad por las seis escenas
+   ------------------------------------------------------------------ */
+
+.v-cine {
+  position: relative;
+  z-index: 1;
+}
+
+.v-cine__fijo {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Espacio 3D. Las escenas se escalonan hacia el fondo y la camara avanza
+   por ellas con el scroll. */
+.v-cine__espacio {
+  position: absolute;
+  inset: 0;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+.v-cine__escena {
+  --z: 0;
+  --rel: 0;
+  --o: 0;
+  --blur: 0;
+  --lp: 0;
+  position: absolute;
+  left: 40%;
+  top: 43%;
+  width: min(40rem, 50vw);
+  /* El corrimiento tiene que ganarle al encogimiento de la perspectiva:
+     con menos de ~14% la de atras queda dentro del marco de la del
+     frente y no se ve. Va a 26% para que asome de verdad. */
+  transform: translate(-50%, -50%)
+    translate3d(
+      calc(var(--rel, 0) * 26%),
+      calc(var(--rel, 0) * 11%),
+      calc(var(--z) * 1px)
+    );
+  opacity: var(--o);
+  filter: blur(calc(var(--blur) * 1px));
+  will-change: transform, opacity, filter;
+}
+
+/* Antes de que corra el JS, la primera ya se ve */
+.v-cine__escena:first-child {
+  --o: 1;
+}
+
+/* Aura que cambia de color con la escena al frente */
+.v-cine__aura {
+  position: absolute;
+  left: 40%;
+  top: 43%;
+  width: 70%;
+  aspect-ratio: 1.4;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.45;
+  pointer-events: none;
+  background: radial-gradient(
+    closest-side,
+    var(--v-aura, var(--v-glow-magenta)),
+    var(--v-ink-00) 72%
+  );
+  transition: background 1.2s var(--v-ease);
+}
+
+.v-cine__espacio[data-escena="0"] {
+  --v-aura: rgba(244, 241, 255, 0.2);
+}
+.v-cine__espacio[data-escena="1"] {
+  --v-aura: var(--v-glow-magenta);
+}
+.v-cine__espacio[data-escena="2"] {
+  --v-aura: var(--v-glow-violet);
+}
+.v-cine__espacio[data-escena="3"] {
+  --v-aura: var(--v-glow-cyan);
+}
+.v-cine__espacio[data-escena="4"] {
+  --v-aura: var(--v-glow-violet);
+}
+.v-cine__espacio[data-escena="5"] {
+  --v-aura: var(--v-glow-magenta);
+}
+
+/* Rotulo sobre cada escena: solo se usa en el modo apilado */
+.v-cine__rotulo {
+  display: none;
+}
+
+/* --- Rotulo de la escena al frente --- */
+.v-cine__hud {
+  position: absolute;
+  left: 0;
+  bottom: 5.5rem;
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 2rem;
+  pointer-events: none;
+}
+
+@media (min-width: 1280px) {
+  .v-cine__hud {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.v-cine__paso {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-top: 1.4rem;
+  max-width: 34rem;
+  animation: v-cine-paso 0.7s var(--v-ease) both;
+}
+
+@keyframes v-cine-paso {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+.v-cine__num {
+  flex: none;
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 3.4rem;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--v-line-strong);
+}
+
+.v-cine__titulo {
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.85rem;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.v-cine__desc {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--v-fog);
+}
+
+/* --- Pista de avance --- */
+.v-cine__pista {
+  position: absolute;
+  left: 50%;
+  bottom: 2.5rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+  pointer-events: none;
+}
+
+.v-cine__pista i {
+  display: block;
+  width: 2.2rem;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--v-line);
+  transition: background-color 0.6s var(--v-ease);
+}
+
+.v-cine__pista i[data-visto="true"] {
+  background: var(--v-magenta);
+}
+
+/* Linea fina al pie del viewport con el avance continuo */
+.v-cine__pistaFill {
+  position: absolute;
+  left: 50%;
+  bottom: -2.5rem;
+  width: 100vw;
+  height: 1px;
+  transform-origin: left;
+  transform: translateX(-50%) scaleX(0);
+  background: linear-gradient(90deg, var(--v-magenta), var(--v-violet));
+}
+
+/* ------------------------------------------------------------------
+   06. El kit entregado
+   ------------------------------------------------------------------ */
+
+.esc--kit {
+  background: linear-gradient(160deg, var(--v-paper), var(--v-paper-2));
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 4%;
+}
+
+.kit {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 4%;
+  min-height: 0;
+}
+
+.kit__logo {
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 30px -18px rgba(4, 3, 10, 0.5);
+}
+
+.kit__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.kit__lado {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1.4fr;
+  gap: 6%;
+  min-height: 0;
+}
+
+.kit__bloque {
+  border-radius: 0.7rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 22px -16px rgba(4, 3, 10, 0.45);
+}
+
+.kit__paleta {
+  display: flex;
+}
+
+.kit__paleta i {
+  flex: 1;
+}
+
+.kit__tipo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--v-ink);
+}
+
+.kit__tipo span {
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: -0.04em;
+}
+
+.kit__tipo b {
+  font-weight: 400;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.45;
+}
+
+.kit__web img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.kit__pie {
+  flex: none;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--v-ink);
+  opacity: 0.4;
+}
+
+/* ------------------------------------------------------------------
+   Sin anclaje (movil / sin movimiento): las escenas se apilan
+   ------------------------------------------------------------------ */
+
+@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  .v-cine {
+    height: auto !important;
+    padding-block: 5rem;
+  }
+
+  .v-cine__fijo {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+
+  .v-cine__espacio {
+    position: static;
+    perspective: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    padding-inline: 1.25rem;
+  }
+
+  .v-cine__aura {
+    display: none;
+  }
+
+  .v-cine__escena {
+    position: static;
+    width: 100%;
+    transform: none;
+    opacity: 1;
+    filter: none;
+    --lp: 1;
+  }
+
+  .v-cine__rotulo {
+    display: block;
+    margin-bottom: 0.9rem;
+  }
+
+  .v-cine__hud {
+    position: static;
+    max-width: none;
+    padding-inline: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .v-cine__paso {
+    animation: none;
+  }
+
+  .v-cine__pista {
+    display: none;
+  }
 }

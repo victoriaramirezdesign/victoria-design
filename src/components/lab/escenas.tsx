@@ -153,3 +153,39 @@ export function EscenaSitio() {
     </div>
   );
 }
+
+/* --- 06. El kit, entregado ----------------------------------------- */
+const CASO = projects.find((p) => p.slug === "reyes-odontologia") ?? projects[0];
+
+export function EscenaKit({ colores }: { colores: string[] }) {
+  return (
+    <div className="esc esc--kit">
+      <div className="kit">
+        <div className="kit__logo">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={CASO.cover} alt="" aria-hidden />
+        </div>
+
+        <div className="kit__lado">
+          <div className="kit__bloque kit__paleta">
+            {colores.map((c) => (
+              <i key={c} style={{ background: c }} />
+            ))}
+          </div>
+
+          <div className="kit__bloque kit__tipo">
+            <span>Aa</span>
+            <b>Tipografía</b>
+          </div>
+
+          <div className="kit__bloque kit__web">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`/trabajos/${CASO.slug}/thumb.png`} alt="" aria-hidden />
+          </div>
+        </div>
+      </div>
+
+      <p className="kit__pie">{CASO.title} · kit de marca entregado</p>
+    </div>
+  );
+}
