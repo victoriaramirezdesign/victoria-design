@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { PilaProyectos } from "@/components/lab/pila-proyectos";
 import { FichaPlan } from "@/components/lab/ficha-plan";
+import { VideoCierre } from "@/components/lab/video-cierre";
 import { TiltCard } from "@/components/lab/tilt-card";
 import { Rail } from "@/components/lab/rail";
 import { Counter, Magnetic, Rise, Words } from "@/components/lab/motion";
@@ -297,27 +298,21 @@ export function Cifras() {
 
 export function Cta() {
   return (
-    <section className="relative overflow-hidden py-32 sm:py-44">
-      <div
-        aria-hidden
-        className="v-breathe pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]"
-        style={{
-          background:
-            "radial-gradient(circle, var(--v-glow-magenta), var(--v-glow-violet) 45%, transparent 70%)",
-        }}
-      />
-      <div className="v-grid pointer-events-none absolute inset-0 -z-10 opacity-25" />
+    <section id="siguiente-paso" className="v-cierre">
+      <VideoCierre />
+      <span className="v-cierre__velo" aria-hidden />
+      <span className="v-cierre__base" aria-hidden />
 
-      <div className="mx-auto max-w-4xl px-5 text-center sm:px-8">
-        <p className="v-label">Siguiente paso</p>
+      <div className="relative z-10 mx-auto max-w-4xl px-5 text-center sm:px-8">
+        <p className="v-label v-cierre__rotulo">Siguiente paso</p>
         <h2 className="v-display mt-8 text-[2.6rem] sm:text-7xl">
           <Words text="¿Tienes un proyecto" />
           <Rise as="span" delay={340} className="mt-2">
-            <span className="v-grad">en mente?</span>
+            en mente?
           </Rise>
         </h2>
         <Rise delay={480}>
-          <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-[var(--v-fog)] sm:text-lg">
+          <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed sm:text-lg">
             Escríbenos y en 24 horas te respondemos con una idea de alcance,
             tiempos y precio. La primera llamada es gratis.
           </p>
@@ -325,7 +320,7 @@ export function Cta() {
         <Rise delay={600}>
           <div className="mt-12 flex flex-wrap justify-center gap-4">
             <Magnetic>
-              <Link href="/contacto" className="v-btn v-btn--solid">
+              <Link href="/contacto" className="v-cierre__btn">
                 Escribir al estudio
                 <span aria-hidden>→</span>
               </Link>
@@ -335,7 +330,7 @@ export function Cta() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="v-btn v-btn--ghost"
+                className="v-cierre__btn v-cierre__btn--linea"
               >
                 WhatsApp
               </a>

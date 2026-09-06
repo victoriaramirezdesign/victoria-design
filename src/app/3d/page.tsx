@@ -7,7 +7,7 @@ import { Secuencia } from "@/components/lab/secuencia";
 import { BarraLogos } from "@/components/lab/barra-logos";
 import { NavLab } from "@/components/lab/nav-lab";
 import { ZonaSuperior } from "@/components/lab/zona-superior";
-import { FondoVideo } from "@/components/lab/fondo-video";
+import { FondoAmbiente } from "@/components/lab/fondo-ambiente";
 import {
   BadgeBorrador,
   Cifras,
@@ -47,12 +47,11 @@ export default function Borrador3DPage() {
 
       <NavLab />
 
-      {/* Hero y secuencia comparten fondo: la entrega entre los dos no
-          se ve como un corte, sino como un mismo plano continuo. */}
+      {/* El fondo corre detras de toda la pagina: no se corta al salir
+          de la portada, solo baja a nivel ambiente. */}
+      <FondoAmbiente />
+
       <ZonaSuperior>
-        <div className="v-top__fondo" aria-hidden>
-          <FondoVideo />
-        </div>
         <Hero />
         <Secuencia />
       </ZonaSuperior>

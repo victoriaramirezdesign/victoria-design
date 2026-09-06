@@ -66,6 +66,7 @@ export function Secuencia() {
   const seccionRef = useRef<HTMLDivElement | null>(null);
   const escenasRef = useRef<(HTMLDivElement | null)[]>([]);
   const barraRef = useRef<HTMLSpanElement | null>(null);
+  const camaraRef = useRef<HTMLDivElement | null>(null);
   const [activa, setActiva] = useState(0);
 
   const anchoOk = useMediaQuery("(min-width: 1024px)");
@@ -109,8 +110,15 @@ export function Secuencia() {
         else if (d > 1) o = 1 - (d - 1) / FUNDIDO;
         o = Math.min(Math.max(o, 0), 1);
 
+        // Signo del recorrido: negativo la que viene, positivo la que se va.
+        const dd = Math.min(Math.max(d - 0.5, -1), 1);
+        // Profundidad: las que no estan al frente se van hacia el fondo.
+        const dz = -190 * (1 - o);
+
         el.style.setProperty("--o", o.toFixed(3));
         el.style.setProperty("--lp", Math.min(Math.max(d, 0), 1).toFixed(3));
+        el.style.setProperty("--dd", dd.toFixed(3));
+        el.style.setProperty("--dz", dz.toFixed(1));
       }
 
       if (barraRef.current) barraRef.current.style.transform = `scaleX(${p})`;
@@ -143,7 +151,41 @@ export function Secuencia() {
     };
   }, [anclada]);
 
-  const escena = ESCENAS[activa];
+  // La camara sigue al puntero: da volumen sin robar protagonismo.
+  useEffect(() => {
+    const cam = camaraRef.current;
+    if (!cam) return;
+    if (!window.matchMedia?.("(pointer: fine)").matches) return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    let tx = 0;
+    let ty = 0;
+    let x = 0;
+    let y = 0;
+
+    const alMover = (e: PointerEvent) => {
+      tx = (e.clientX / window.innerWidth) * 2 - 1;
+      ty = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+
+    const bucle = () => {
+      x += (tx - x) * 0.05;
+      y += (ty - y) * 0.05;
+      cam.style.setProperty("--camx", `${x * 7}deg`);
+      cam.style.setProperty("--camy", `${-y * 5}deg`);
+      raf = requestAnimationFrame(bucle);
+    };
+
+    window.addEventListener("pointermove", alMover, { passive: true });
+    raf = requestAnimationFrame(bucle);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("pointermove", alMover);
+    };
+  }, []);
+
 
   return (
     <div
@@ -165,15 +207,25 @@ export function Secuencia() {
               <span className="v-grad">sitio publicado.</span>
             </h2>
 
-            <div className="v-seq__paso" key={escena.id}>
-              <p className="v-mono text-xs text-[var(--v-magenta)]">
-                {String(activa + 1).padStart(2, "0")} / {String(N).padStart(2, "0")}
-              </p>
-              <p className="v-display mt-3 text-xl sm:text-2xl">{escena.nombre}</p>
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-[var(--v-fog)] sm:text-base">
-                {escena.texto}
-              </p>
-            </div>
+            {/* Los seis pasos siempre a la vista: el activo abre su texto */}
+            <ol className="v-seq__pasos">
+              {ESCENAS.map((e, i) => (
+                <li
+                  key={e.id}
+                  data-activo={i === activa}
+                  data-visto={i < activa}
+                >
+                  <span className="v-seq__marca" aria-hidden />
+                  <div className="v-seq__paso">
+                    <p className="v-seq__nombre">
+                      <i className="v-mono">{String(i + 1).padStart(2, "0")}</i>
+                      {e.nombre}
+                    </p>
+                    <p className="v-seq__desc">{e.texto}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
 
             <div className="v-seq__barra">
               <span ref={barraRef} />
@@ -181,7 +233,9 @@ export function Secuencia() {
           </div>
 
           {/* Escenario: las seis escenas ocupan el mismo hueco */}
-          <div className="v-seq__escenario">
+          <div className="v-seq__escenario" data-escena={activa}>
+            <span className="v-seq__aura" aria-hidden />
+            <div ref={camaraRef} className="v-seq__camara">
             {ESCENAS.map((e, i) => (
               <div
                 key={e.id}
@@ -202,6 +256,7 @@ export function Secuencia() {
                 {i === 5 ? <WebStack /> : null}
               </div>
             ))}
+            </div>
           </div>
         </div>
       </div>
