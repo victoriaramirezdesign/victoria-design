@@ -22,7 +22,17 @@ const CAPAS: { variante: Variante; z: number; nombre: string }[] = [
   { variante: "live", z: 162, nombre: "Sitio en vivo" },
 ];
 
-const muestras = projects.slice(0, 3);
+/**
+ * Portadas que asoman en la capa "sitio en vivo". Van con miniatura
+ * propia (public/trabajos/<slug>/thumb.png, ~30 KB) en vez del cover de
+ * 1200x900: es decoracion del hero, no vale la pena pagar 300 KB.
+ * Si se cambian estos slugs, hay que generar su thumb.png.
+ */
+const SLUGS_MUESTRA = ["reyes-odontologia", "greenprod", "no-hay-2"];
+
+const muestras = SLUGS_MUESTRA.map(
+  (slug) => projects.find((p) => p.slug === slug) ?? { slug, title: slug },
+);
 
 function Capa({ variante }: { variante: Variante }) {
   if (variante === "board") {
@@ -59,7 +69,12 @@ function Capa({ variante }: { variante: Variante }) {
             <span key={p.slug} className="v3-card">
               {variante === "live" ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={p.cover} alt="" aria-hidden loading="lazy" />
+                <img
+                  src={`/trabajos/${p.slug}/thumb.png`}
+                  alt=""
+                  aria-hidden
+                  decoding="async"
+                />
               ) : null}
             </span>
           ))}
